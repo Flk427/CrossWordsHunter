@@ -1,0 +1,15 @@
+Copying a (rtf) table into the clipboard via QT (or: Writing a QTextDocument into clipboard)
+https://stackoverflow.com/questions/9775323/copying-a-rtf-table-into-the-clipboard-via-qt-or-writing-a-qtextdocument-int
+
+
+
+Qt 5.8
+Qt Widgets
+Rich Text Examples
+Text Edit
+
+
+Qt 5.8
+Qt Widgets
+Rich Text Examples
+Syntax Highlighter Example
