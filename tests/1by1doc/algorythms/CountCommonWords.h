@@ -5,12 +5,12 @@
 #include <QString>
 #include <QPair>
 
-class CompareWordsLists
+class CountCommonWords
 {
 public:
-	CompareWordsLists();
+	CountCommonWords();
 };
 
-QMap<QString, QPair<int, int>> compareWordsLists(const QStringList& words1, const QStringList& words2);
+QMap<QString, QPair<int, int>> countCommonWords(const QStringList& words1, const QStringList& words2);
 
 #endif // COMPAREWORDSLISTS_H

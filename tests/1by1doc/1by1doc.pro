@@ -15,13 +15,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
-    algorythms/CompareWordsLists.cpp \
     helpers/WordsHelpers.cpp \
     datasources/textsources/TextFileSource.cpp \
-    helpers/DevelHelpers.cpp
+    helpers/DevelHelpers.cpp \
+    algorythms/CountCommonWords.cpp
 
 HEADERS += \
-    algorythms/CompareWordsLists.h \
     helpers/WordsHelpers.h \
     datasources/textsources/TextFileSource.h \
-    helpers/DevelHelpers.h
+    helpers/DevelHelpers.h \
+    algorythms/CountCommonWords.h

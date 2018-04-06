@@ -1,7 +1,7 @@
 #include <QCoreApplication>
 #include <iostream>
 #include <Windows.h>
-#include "algorythms/CompareWordsLists.h"
+#include "algorythms/CountCommonWords.h"
 #include "helpers/WordsHelpers.h"
 #include "datasources/textsources/TextFileSource.h"
 #include "helpers/DevelHelpers.h"
@@ -13,7 +13,7 @@ void test()
 {
 	QStringList words1 = getWordsListFromText(readTextFromFile(text1));
 	QStringList words2 = getWordsListFromText(readTextFromFile(text2));
-	QMap<QString, QPair<int, int>> res = compareWordsLists(words1, words2);
+	QMap<QString, QPair<int, int>> res = countCommonWords(words1, words2);
 	saveResult(res);
 }
 

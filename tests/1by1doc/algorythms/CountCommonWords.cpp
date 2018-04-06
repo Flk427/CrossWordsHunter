@@ -1,13 +1,13 @@
-#include "CompareWordsLists.h"
+#include "CountCommonWords.h"
 #include <QSet>
 #include "../helpers/WordsHelpers.h"
 
-CompareWordsLists::CompareWordsLists()
+CountCommonWords::CountCommonWords()
 {
 
 }
 
-QMap<QString, QPair<int, int>> compareWordsLists(const QStringList& words1, const QStringList& words2)
+QMap<QString, QPair<int, int>> countCommonWords(const QStringList& words1, const QStringList& words2)
 {
 	QMap<QString, int> countContainer1 = countWords(words1);
 	QMap<QString, int> countContainer2 = countWords(words2);
