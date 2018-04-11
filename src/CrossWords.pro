@@ -24,7 +24,8 @@ SOURCES += main.cpp \
     gui/MainWindow.cpp \
     gui/TextEditorDialog.cpp \
     helpers/FilesHelpers.cpp \
-    core/DocumentsStorage.cpp
+    core/DocumentsStorage.cpp \
+    core/ApplicationSettings.cpp
 
 HEADERS += \
     helpers/WordsHelpers.h \
@@ -34,7 +35,8 @@ HEADERS += \
     gui/MainWindow.h \
     gui/TextEditorDialog.h \
     helpers/FilesHelpers.h \
-    core/DocumentsStorage.h
+    core/DocumentsStorage.h \
+    core/ApplicationSettings.h
 
 FORMS += \
     gui/MainWindow.ui \
