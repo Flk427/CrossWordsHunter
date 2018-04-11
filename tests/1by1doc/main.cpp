@@ -1,10 +1,14 @@
-#include <QCoreApplication>
+#include <QApplication>
+#include <QDebug>
+#include <QWidget>
+//#include <QDialog>
 #include <iostream>
 #include <Windows.h>
 #include "algorythms/CountCommonWords.h"
 #include "helpers/WordsHelpers.h"
 #include "datasources/textsources/TextFileSource.h"
 #include "helpers/DevelHelpers.h"
+#include <gui/MainWindow.h>
 
 static const char* text1 = "D:\\_private\\projects\\volkov\\CrossWords\\tests\\data\\text1.txt";
 static const char* text2 = "D:\\_private\\projects\\volkov\\CrossWords\\tests\\data\\text2.txt";
@@ -19,10 +23,14 @@ void test()
 
 int main(int argc, char *argv[])
 {
-//	QCoreApplication a(argc, argv);
-//	return a.exec();
+	QApplication a(argc, argv);
 
-	test();
-	std::cout << "done." << std::endl;
-	return 0;
+	MainWindow w;
+	w.show();
+
+	return a.exec();
+
+//	test();
+//	qDebug() << "done.";
+//	return 0;
 }

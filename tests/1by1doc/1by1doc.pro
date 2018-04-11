@@ -1,6 +1,8 @@
-QT -= gui
+#QT -= gui
+QT += widgets
 
-CONFIG += c++11 console
+CONFIG += c++11
+#CONFIG += console
 CONFIG -= app_bundle
 
 # The following define makes your compiler emit warnings if you use
@@ -18,10 +20,22 @@ SOURCES += main.cpp \
     helpers/WordsHelpers.cpp \
     datasources/textsources/TextFileSource.cpp \
     helpers/DevelHelpers.cpp \
-    algorythms/CountCommonWords.cpp
+    algorythms/CountCommonWords.cpp \
+    gui/MainWindow.cpp \
+    gui/TextEditorDialog.cpp \
+    helpers/FilesHelpers.cpp \
+    core/DocumentsStorage.cpp
 
 HEADERS += \
     helpers/WordsHelpers.h \
     datasources/textsources/TextFileSource.h \
     helpers/DevelHelpers.h \
-    algorythms/CountCommonWords.h
+    algorythms/CountCommonWords.h \
+    gui/MainWindow.h \
+    gui/TextEditorDialog.h \
+    helpers/FilesHelpers.h \
+    core/DocumentsStorage.h
+
+FORMS += \
+    gui/MainWindow.ui \
+    gui/TextEditorDialog.ui
