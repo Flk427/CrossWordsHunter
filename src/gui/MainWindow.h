@@ -18,7 +18,7 @@ public:
 
 public slots:
 	void loadNewEvent();
-	void loadNewReestr();
+	void loadNewJournal();
 	void statusUpdate(QString text);
 
 private:

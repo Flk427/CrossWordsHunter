@@ -251,7 +251,7 @@
    <sender>toolButton_2</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>loadNewReestr()</slot>
+   <slot>loadNewJournal()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>475</x>
@@ -266,6 +266,6 @@
  </connections>
  <slots>
   <slot>loadNewEvent()</slot>
-  <slot>loadNewReestr()</slot>
+  <slot>loadNewJournal()</slot>
  </slots>
 </ui>

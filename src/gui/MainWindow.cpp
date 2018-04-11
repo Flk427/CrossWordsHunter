@@ -29,14 +29,14 @@ void MainWindow::loadNewEvent()
 	}
 }
 
-void MainWindow::loadNewReestr()
+void MainWindow::loadNewJournal()
 {
 	TextEditorDialog editor;
 
 	if (editor.exec() == QDialog::Accepted)
 	{
-		// acceptReestr
-		DocumentsStorage::Instance().addDocument(DocumentsStorage::DocumentType::Reestr, this, editor.getTextDocument());
+		// acceptJournal
+		DocumentsStorage::Instance().addDocument(DocumentsStorage::DocumentType::Journal, this, editor.getTextDocument());
 	}
 }
 
