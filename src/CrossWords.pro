@@ -1,7 +1,8 @@
-QT -= gui
+#QT -= gui
+QT += widgets
 
 CONFIG += c++11
-CONFIG += console
+#CONFIG += console
 CONFIG -= app_bundle
 
 # The following define makes your compiler emit warnings if you use
@@ -16,13 +17,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
-    ../../src/helpers/WordsHelpers.cpp \
-    ../../src/datasources/textsources/TextFileSource.cpp \
-    ../../src/helpers/DevelHelpers.cpp \
-    ../../src/algorythms/CountCommonWords.cpp
+    helpers/WordsHelpers.cpp \
+    datasources/textsources/TextFileSource.cpp \
+    helpers/DevelHelpers.cpp \
+    algorythms/CountCommonWords.cpp \
+    gui/MainWindow.cpp \
+    gui/TextEditorDialog.cpp \
+    helpers/FilesHelpers.cpp \
+    core/DocumentsStorage.cpp
 
 HEADERS += \
-    ../../src/helpers/WordsHelpers.h \
-    ../../src/datasources/textsources/TextFileSource.h \
-    ../../src/helpers/DevelHelpers.h \
-    ../../src/algorythms/CountCommonWords.h
+    helpers/WordsHelpers.h \
+    datasources/textsources/TextFileSource.h \
+    helpers/DevelHelpers.h \
+    algorythms/CountCommonWords.h \
+    gui/MainWindow.h \
+    gui/TextEditorDialog.h \
+    helpers/FilesHelpers.h \
+    core/DocumentsStorage.h
+
+FORMS += \
+    gui/MainWindow.ui \
+    gui/TextEditorDialog.ui
