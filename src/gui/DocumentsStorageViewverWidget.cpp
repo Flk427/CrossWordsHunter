@@ -2,6 +2,7 @@
 #include "ui_DocumentsStorageViewverWidget.h"
 
 #include <QDir>
+#include <QTextEdit>
 
 DocumentsStorageViewverWidget::DocumentsStorageViewverWidget(QWidget *parent) :
 	QWidget(parent),
@@ -10,6 +11,9 @@ DocumentsStorageViewverWidget::DocumentsStorageViewverWidget(QWidget *parent) :
 	ui->setupUi(this);
 
 	m_documentType = DocumentsStorage::Event;
+	m_documentTextHighlighter = new DocumentTextHighlighter(ui->textEdit);
+
+//	connect(ui->textEdit, &QTextEdit::cursorPositionChanged, this, &DocumentsStorageViewverWidget::test);
 }
 
 DocumentsStorageViewverWidget::~DocumentsStorageViewverWidget()
@@ -39,4 +43,14 @@ void DocumentsStorageViewverWidget::documentSelected(QModelIndex index)
 		ui->textEdit->setHtml(html);
 		f.close();
 	}
+}
+
+void DocumentsStorageViewverWidget::test()
+{
+	QTextCursor textCursor = ui->textEdit->textCursor();
+	QTextBlockFormat textBlockFormat;
+	textBlockFormat.setBackground(Qt::red);
+	textCursor.select(QTextCursor::LineUnderCursor);
+	textCursor.setBlockFormat(textBlockFormat);
+	ui->textEdit->setTextCursor(textCursor);
 }
