@@ -20,6 +20,8 @@ public slots:
 	void loadNewEvent();
 	void loadNewJournal();
 	void statusUpdate(QString text);
+	void eventsVisible(bool visible);
+	void journalsVisible(bool visible);
 
 private:
 	Ui::MainWindow *ui;
