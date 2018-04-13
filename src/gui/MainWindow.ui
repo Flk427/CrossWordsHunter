@@ -231,31 +231,62 @@
              </property>
              <property name="sizeHint" stdset="0">
               <size>
-               <width>576</width>
+               <width>284</width>
                <height>20</height>
               </size>
              </property>
             </spacer>
            </item>
            <item>
-            <widget class="QCheckBox" name="checkBox">
-             <property name="text">
-              <string>Сводки</string>
+            <widget class="QFrame" name="frame_7">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
              </property>
-             <property name="checked">
-              <bool>true</bool>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
              </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <widget class="QToolButton" name="toolButton_3">
+                <property name="text">
+                 <string>Сводки</string>
+                </property>
+                <property name="checkable">
+                 <bool>true</bool>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="toolButton_4">
+                <property name="text">
+                 <string>Реестры</string>
+                </property>
+                <property name="checkable">
+                 <bool>true</bool>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="checkBox_2">
-             <property name="text">
-              <string>Реестры</string>
+            <spacer name="horizontalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
              </property>
-             <property name="checked">
-              <bool>true</bool>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>283</width>
+               <height>20</height>
+              </size>
              </property>
-            </widget>
+            </spacer>
            </item>
           </layout>
          </widget>
@@ -348,14 +379,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>checkBox</sender>
+   <sender>toolButton_3</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
    <slot>eventsVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>665</x>
-     <y>62</y>
+     <x>75</x>
+     <y>60</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -364,14 +395,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>checkBox_2</sender>
+   <sender>toolButton_4</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
    <slot>journalsVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>734</x>
-     <y>62</y>
+     <x>134</x>
+     <y>60</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
