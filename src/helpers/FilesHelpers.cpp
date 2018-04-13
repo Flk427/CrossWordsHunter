@@ -69,7 +69,7 @@ bool checkFileName(const QString& fileName)
 
 QString generateFileName()
 {
-	return QDate::currentDate().toString("yyyyMMdd") + QTime::currentTime().toString("hhmmss") + ".odt";
+	return QDate::currentDate().toString("yyyyMMdd") + QTime::currentTime().toString("hhmmss") + ".html";
 }
 
 } // end of namespace FilesHelpers
