@@ -1,3 +1,5 @@
+TARGET = CrossWords
+
 #QT -= gui
 QT += widgets
 
@@ -10,6 +12,16 @@ CONFIG -= app_bundle
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
+
+# Release binaries and symbols will placed at...
+CONFIG(release, release|debug) {
+    DESTDIR = $${PWD}/../bin/CrossWords
+    message(Place release binaries to $$DESTDIR)
+
+    QMAKE_PRE_LINK = "$${PWD}/../tools/mkbin.cmd"
+    QMAKE_POST_LINK = "$${PWD}/../tools/deploy.cmd $$(QTDIR)"
+}
+
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
