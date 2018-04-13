@@ -28,8 +28,9 @@ DocumentTextHighlighter::DocumentTextHighlighter(QObject* parent) : QSyntaxHighl
 	rule.format = classFormat;
 	highlightingRules.append(rule);
 
+	classFormat.setFontWeight(QFont::Bold);
 	classFormat.setForeground(Qt::red);
-	rule.pattern = QRegularExpression("\\bколлеги\\b"); // my test
+	rule.pattern = QRegularExpression("выразит"); // my test
 	rule.format = classFormat;
 	highlightingRules.append(rule);
 
