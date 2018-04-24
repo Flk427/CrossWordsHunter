@@ -10,6 +10,8 @@ class DocumentTextHighlighter : public QSyntaxHighlighter
 public:
 	DocumentTextHighlighter(QObject* parent);
 
+	void setKeywords(const QStringList& keywords);
+
 	// QSyntaxHighlighter interface
 protected:
 	virtual void highlightBlock(const QString& text) override;
@@ -21,17 +23,15 @@ private:
 		QTextCharFormat format;
 	};
 
-	QVector<HighlightingRule> highlightingRules;
+	QVector<HighlightingRule> m_highlightingRules;
 
-	QRegularExpression commentStartExpression;
-	QRegularExpression commentEndExpression;
+	QRegularExpression m_commentStartExpression;
+	QRegularExpression m_commentEndExpression;
+	QTextCharFormat m_multiLineCommentFormat;
 
-	QTextCharFormat keywordFormat;
-	QTextCharFormat classFormat;
-	QTextCharFormat singleLineCommentFormat;
-	QTextCharFormat multiLineCommentFormat;
-	QTextCharFormat quotationFormat;
-	QTextCharFormat functionFormat;
+	void setupDefault();
+	void highlightBlockRegExpExample(const QString& text);
+	void highlightBlockCommentsExample(const QString& text);
 };
 
 #endif // DOCUMENTTEXTHIGHLIGHTER_H

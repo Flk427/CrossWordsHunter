@@ -62,3 +62,14 @@ void MainWindow::journalsVisible(bool visible)
 {
 	ui->journalsViewverWidget->setVisible(visible);
 }
+
+void MainWindow::on_actionQuit_triggered()
+{
+	// Эта штука автоматически связывается через QMetaObject::connectSlotsByName(MainWindow);
+	close();
+}
+
+//void MainWindow::on_actionLoadEvent_triggered()
+//{
+//	loadNewEvent();
+//}

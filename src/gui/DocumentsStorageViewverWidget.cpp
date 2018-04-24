@@ -11,7 +11,6 @@ DocumentsStorageViewverWidget::DocumentsStorageViewverWidget(QWidget *parent) :
 	ui->setupUi(this);
 
 	m_documentType = DocumentsStorage::Event;
-	m_documentTextHighlighter = new DocumentTextHighlighter(ui->textEdit);
 
 //	connect(ui->textEdit, &QTextEdit::cursorPositionChanged, this, &DocumentsStorageViewverWidget::test);
 }

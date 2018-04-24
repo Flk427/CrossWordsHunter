@@ -40,7 +40,8 @@ SOURCES += main.cpp \
     core/ApplicationSettings.cpp \
     gui/DocumentsStorageViewverWidget.cpp \
     core/DocumentsListModel.cpp \
-    core/DocumentTextHighlighter.cpp
+    core/DocumentTextHighlighter.cpp \
+    gui/DocumentEditorWidget.cpp
 
 HEADERS += \
     helpers/WordsHelpers.h \
@@ -54,7 +55,8 @@ HEADERS += \
     core/ApplicationSettings.h \
     gui/DocumentsStorageViewverWidget.h \
     core/DocumentsListModel.h \
-    core/DocumentTextHighlighter.h
+    core/DocumentTextHighlighter.h \
+    gui/DocumentEditorWidget.h
 
 FORMS += \
     gui/MainWindow.ui \

@@ -2,12 +2,18 @@
 
 ApplicationSettings::ApplicationSettings()
 {
-
+	m_keywords = QStringList() << "благо" << "год";
 }
 
 ApplicationSettings::~ApplicationSettings()
 {
 
+}
+
+void ApplicationSettings::addKeyword(const QString& keyword)
+{
+	m_keywords.push_back(keyword);
+	emit keywordsChanged(m_keywords);
 }
 
 ApplicationSettings& ApplicationSettings::Instance()
@@ -30,4 +36,9 @@ QString ApplicationSettings::getEventsDir()
 QString ApplicationSettings::getJournalsDir()
 {
 	return "Journals";
+}
+
+const QStringList& ApplicationSettings::getKeywords()
+{
+	return m_keywords;
 }

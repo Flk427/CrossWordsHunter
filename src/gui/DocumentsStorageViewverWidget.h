@@ -4,7 +4,6 @@
 #include <QWidget>
 #include <QListWidgetItem>
 #include "../core/DocumentsStorage.h"
-#include "core/DocumentTextHighlighter.h"
 
 namespace Ui {
 class DocumentsStorageViewverWidget;
@@ -24,7 +23,6 @@ private:
 	Ui::DocumentsStorageViewverWidget *ui;
 
 	DocumentsStorage::DocumentType m_documentType;
-	DocumentTextHighlighter* m_documentTextHighlighter;
 
 public slots:
 	void setModel(QAbstractListModel* model);

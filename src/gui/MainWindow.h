@@ -23,6 +23,11 @@ public slots:
 	void eventsVisible(bool visible);
 	void journalsVisible(bool visible);
 
+private slots:
+	void on_actionQuit_triggered();
+
+//	void on_actionLoadEvent_triggered();
+
 private:
 	Ui::MainWindow *ui;
 };

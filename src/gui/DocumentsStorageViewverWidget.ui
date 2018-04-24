@@ -74,7 +74,7 @@
          <enum>Qt::Vertical</enum>
         </property>
         <widget class="QListView" name="listView"/>
-        <widget class="QTextEdit" name="textEdit"/>
+        <widget class="DocumentEditorWidget" name="textEdit"/>
        </widget>
       </item>
      </layout>
@@ -82,6 +82,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DocumentEditorWidget</class>
+   <extends>QTextEdit</extends>
+   <header>DocumentEditorWidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
