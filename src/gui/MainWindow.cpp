@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::MainWindow)
 {
+	setWindowIcon(QIcon(":/img/CrossWordsHunter.ico"));
+
 	m_searchWordDialog = new SearchWordDialog(this);
 
 	ui->setupUi(this);

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>CrossWordsHunter.ico</file>
+    </qresource>
+</RCC>

@@ -22,6 +22,7 @@ CONFIG(release, release|debug) {
     QMAKE_POST_LINK = "$${PWD}/../tools/deploy.cmd $$(QTDIR)"
 }
 
+#RC_ICONS = CrossWordsHunter.ico
 RC_FILE = CrossWordsHunter.rc
 
 # You can also make your code fail to compile if you use deprecated APIs.
@@ -72,3 +73,6 @@ FORMS += \
 
 DISTFILES += \
     CrossWordsHunter.rc
+
+RESOURCES += \
+    CrossWordsHunter.qrc
