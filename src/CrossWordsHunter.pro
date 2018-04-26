@@ -22,6 +22,7 @@ CONFIG(release, release|debug) {
     QMAKE_POST_LINK = "$${PWD}/../tools/deploy.cmd $$(QTDIR)"
 }
 
+RC_FILE = CrossWordsHunter.rc
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -68,3 +69,6 @@ FORMS += \
     gui/TextEditorDialog.ui \
     gui/DocumentsStorageViewverWidget.ui \
     gui/SearchWordDialog.ui
+
+DISTFILES += \
+    CrossWordsHunter.rc

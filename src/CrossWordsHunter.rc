@@ -1,0 +1,35 @@
+1 TYPELIB "CrossWordsHunter.rc"
+1 ICON DISCARDABLE "CrossWordsHunter.ico"
+
+#define VS_VERSION_INFO 1
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x0L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+	BEGIN
+	    BLOCK "041904b0"
+		BEGIN
+		    VALUE "CompanyName", "Алексей Кудрин"
+			VALUE "FileDescription", "Поиск совпадений в двух наборах данных"
+			VALUE "FileVersion", "1.0.0.0"
+			VALUE "OriginalFilename", "CrossWordsHunter.exe"
+			VALUE "ProductName", "CrossWordsHunter.exe"
+			VALUE "ProductVersion", "1.0.0.0"
+		END
+	END
+	BLOCK "VarFileInfo"
+	BEGIN
+	    VALUE "Translation", 0x419, 1200
+	END
+END
