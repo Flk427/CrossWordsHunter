@@ -10,7 +10,8 @@ DocumentsStorageViewverWidget::DocumentsStorageViewverWidget(QWidget *parent) :
 {
 	ui->setupUi(this);
 
-	m_documentType = DocumentsStorage::Event;
+	m_documentType = CWTypes::Event;
+	connect(ui->textEdit, &DocumentEditorWidget::searchSelectedWord, this, &DocumentsStorageViewverWidget::searchSelectedWord);
 
 //	connect(ui->textEdit, &QTextEdit::cursorPositionChanged, this, &DocumentsStorageViewverWidget::test);
 }
@@ -20,7 +21,7 @@ DocumentsStorageViewverWidget::~DocumentsStorageViewverWidget()
 	delete ui;
 }
 
-void DocumentsStorageViewverWidget::setDocumentType(const DocumentsStorage::DocumentType& documentType)
+void DocumentsStorageViewverWidget::setDocumentType(const CWTypes::DocumentType& documentType)
 {
 	m_documentType = documentType;
 }
@@ -52,4 +53,9 @@ void DocumentsStorageViewverWidget::test()
 	textCursor.select(QTextCursor::LineUnderCursor);
 	textCursor.setBlockFormat(textBlockFormat);
 	ui->textEdit->setTextCursor(textCursor);
+}
+
+void DocumentsStorageViewverWidget::resetText()
+{
+	ui->textEdit->clear();
 }

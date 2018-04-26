@@ -8,9 +8,11 @@ class DocumentTextHighlighter : public QSyntaxHighlighter
 {
 	Q_OBJECT
 public:
+	enum HighlightType {htKeyword, htSearch};
+
 	DocumentTextHighlighter(QObject* parent);
 
-	void setKeywords(const QStringList& keywords);
+	void setKeywords(const QStringList& keywords, HighlightType highlightType);
 
 	// QSyntaxHighlighter interface
 protected:
@@ -23,7 +25,8 @@ private:
 		QTextCharFormat format;
 	};
 
-	QVector<HighlightingRule> m_highlightingRules;
+	QVector<HighlightingRule> m_keywordsHighlightingRules;
+	QVector<HighlightingRule> m_searchHighlightingRules;
 
 	QRegularExpression m_commentStartExpression;
 	QRegularExpression m_commentEndExpression;

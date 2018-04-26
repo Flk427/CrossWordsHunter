@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QTextDocument>
+#include "gui/SearchWordDialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,9 +20,12 @@ public:
 public slots:
 	void loadNewEvent();
 	void loadNewJournal();
-	void statusUpdate(QString text);
-	void eventsVisible(bool visible);
-	void journalsVisible(bool visible);
+	void updateStatus(QString text);
+	void setEventsVisible(bool visible);
+	void setJournalsVisible(bool visible);
+	void showSearchWordForm(const QString& word="");
+	void searchReset();
+	void resetDocuments();
 
 private slots:
 	void on_actionQuit_triggered();
@@ -30,6 +34,8 @@ private slots:
 
 private:
 	Ui::MainWindow *ui;
+
+	SearchWordDialog* m_searchWordDialog;
 };
 
 #endif // MAINWINDOW_H

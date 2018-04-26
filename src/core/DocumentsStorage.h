@@ -5,36 +5,48 @@
 #include <QTextDocument>
 
 #include "core/DocumentsListModel.h"
+#include "core/types.h"
+
+typedef struct
+{
+	QString word;
+	int eventsWordCount;
+	int journalsWordCount;
+	QStringList eventsList;
+	QStringList journalsList;
+} WordSearchResult;
 
 // Синглтон Майерса.
 class DocumentsStorage : public QObject
 {
 	Q_OBJECT
 public:
-	enum DocumentType {Event, Journal};
-
 	static DocumentsStorage& Instance();
 
-	bool addDocument(DocumentType documentType, const QTextDocument* document);
-	QString getDocumentsPath(const DocumentType documentType);
-	DocumentsListModel* getDocumentsListModel(const DocumentType documentType);
+	bool addDocument(CWTypes::DocumentType documentType, const QTextDocument* document);
+	QString getDocumentsPath(const CWTypes::DocumentType documentType);
+	DocumentsListModel* getDocumentsListModel(const CWTypes::DocumentType documentType, bool filtered);
+	QString getNewDocumentsPath(const CWTypes::DocumentType documentType);
+	QStringList getFilesList(const CWTypes::DocumentType documentType);
+	void setFilesList(const CWTypes::DocumentType documentType, const QStringList& filesList);
 
 private:
 	DocumentsStorage();  // конструктор недоступен
 	~DocumentsStorage(); // и деструктор
+	// необходимо также запретить копирование
+	DocumentsStorage(DocumentsStorage const&); // реализация не нужна
+	DocumentsStorage& operator= (DocumentsStorage const&);  // и тут
 
 	bool m_changed;
 
 	DocumentsListModel m_eventsModel;
 	DocumentsListModel m_journalsModel;
 
-	// необходимо также запретить копирование
-	DocumentsStorage(DocumentsStorage const&); // реализация не нужна
-	DocumentsStorage& operator= (DocumentsStorage const&);  // и тут
+	DocumentsListModel m_eventsFilteredModel;
+	DocumentsListModel m_journalsFilteredModel;
 
-	void readDocumentsList(DocumentType documentType);
+	void readAllDocumentsList(const CWTypes::DocumentType documentType);
 
-	QString getNewDocumentPath(const DocumentType documentType);
 	bool createDocumentDir(const QString& fileName);
 
 signals:
@@ -42,6 +54,7 @@ signals:
 
 public slots:
 	void updateDocumentsLists();
+	void readDocumentsLists();
 };
 
 #endif // FILESSTORAGE_H

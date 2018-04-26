@@ -5,21 +5,45 @@ DocumentTextHighlighter::DocumentTextHighlighter(QObject* parent) : QSyntaxHighl
 	//setupDefault();
 }
 
-void DocumentTextHighlighter::setKeywords(const QStringList& keywords)
+void DocumentTextHighlighter::setKeywords(const QStringList& keywords, HighlightType highlightType)
 {
 	HighlightingRule rule;
 	QTextCharFormat classFormat;
 
-	m_highlightingRules.clear();
+	if (highlightType == htKeyword)
+	{
+		m_keywordsHighlightingRules.clear();
+	}
+	else
+	{
+		m_searchHighlightingRules.clear();
+	}
 
 	classFormat.setFontWeight(QFont::Bold);
 
 	foreach(const QString& keyword, keywords)
 	{
-		classFormat.setForeground(Qt::red);
-		rule.pattern = QRegularExpression("([А-Яа-я]|\\w)*" + keyword + "([А-Яа-я]|\\w)*"); // my test
+		if (highlightType == htKeyword)
+		{
+			classFormat.setForeground(Qt::magenta);
+			rule.pattern = QRegularExpression("([А-Яа-я]|\\w)*" + keyword + "([А-Яа-я]|\\w)*");
+		}
+		else
+		{
+			classFormat.setForeground(Qt::red);
+			rule.pattern = QRegularExpression(keyword);
+		}
+
 		rule.format = classFormat;
-		m_highlightingRules.append(rule);
+
+		if (highlightType == htKeyword)
+		{
+			m_keywordsHighlightingRules.append(rule);
+		}
+		else
+		{
+			m_searchHighlightingRules.append(rule);
+		}
 	}
 
 	rehighlight();
@@ -30,7 +54,7 @@ void DocumentTextHighlighter::highlightBlock(const QString& text)
 	//highlightBlockRegExpExample(text);
 
 	// Не поддерживает подсветку кириллицы через "\w+", нужно "[А-Яа-я]+".
-	foreach (const HighlightingRule &rule, m_highlightingRules)
+	foreach (const HighlightingRule &rule, m_keywordsHighlightingRules)
 	{
 		QRegularExpressionMatchIterator matchIterator = rule.pattern.globalMatch(text);
 
@@ -38,6 +62,27 @@ void DocumentTextHighlighter::highlightBlock(const QString& text)
 		{
 			QRegularExpressionMatch match = matchIterator.next();
 			setFormat(match.capturedStart(), match.capturedLength(), rule.format);
+		}
+	}
+
+
+	foreach (const HighlightingRule &rule, m_searchHighlightingRules)
+	{
+//		QRegularExpressionMatchIterator matchIterator = rule.pattern.globalMatch(text);
+//		while (matchIterator.hasNext())
+//		{
+//			QRegularExpressionMatch match = matchIterator.next();
+//			setFormat(match.capturedStart(), match.capturedLength(), rule.format);
+//		}
+
+		int length;
+		int index = text.indexOf(rule.pattern.pattern(), Qt::CaseInsensitive);
+
+		while (index >= 0)
+		{
+			length = rule.pattern.pattern().length();
+			setFormat(index, length, rule.format);
+			index = text.indexOf(rule.pattern.pattern(), index + length, Qt::CaseInsensitive);
 		}
 	}
 
@@ -70,38 +115,38 @@ void DocumentTextHighlighter::setupDefault()
 	{
 		rule.pattern = QRegularExpression(pattern);
 		rule.format = keywordFormat;
-		m_highlightingRules.append(rule);
+		m_keywordsHighlightingRules.append(rule);
 	}
 
 	classFormat.setForeground(Qt::red);
 	rule.pattern = QRegularExpression("\\bDate\\b"); // my test
 	rule.format = classFormat;
-	m_highlightingRules.append(rule);
+	m_keywordsHighlightingRules.append(rule);
 
 	classFormat.setFontWeight(QFont::Bold);
 	classFormat.setForeground(Qt::red);
 	rule.pattern = QRegularExpression("([А-Яа-я]|\\w)*выразит([А-Яа-я]|\\w)*"); // my test
 	rule.format = classFormat;
-	m_highlightingRules.append(rule);
+	m_keywordsHighlightingRules.append(rule);
 
 	classFormat.setFontWeight(QFont::Bold);
 	classFormat.setForeground(Qt::red);
 	rule.pattern = QRegularExpression("([А-Яа-я]|\\w)*14([А-Яа-я]|\\w)*"); // my test
 	rule.format = classFormat;
-	m_highlightingRules.append(rule);
+	m_keywordsHighlightingRules.append(rule);
 
 	classFormat.setFontWeight(QFont::Bold);
 	classFormat.setForeground(Qt::darkMagenta);
 	rule.pattern = QRegularExpression("\\bQ[A-Za-z]+\\b");
 	rule.format = classFormat;
-	m_highlightingRules.append(rule);
+	m_keywordsHighlightingRules.append(rule);
 
 	QTextCharFormat quotationFormat;
 
 	quotationFormat.setForeground(Qt::darkGreen);
 	rule.pattern = QRegularExpression("\".*\"");
 	rule.format = quotationFormat;
-	m_highlightingRules.append(rule);
+	m_keywordsHighlightingRules.append(rule);
 
 	QTextCharFormat functionFormat;
 
@@ -109,14 +154,14 @@ void DocumentTextHighlighter::setupDefault()
 	functionFormat.setForeground(Qt::blue);
 	rule.pattern = QRegularExpression("\\b[A-Za-z0-9_]+(?=\\()");
 	rule.format = functionFormat;
-	m_highlightingRules.append(rule);
+	m_keywordsHighlightingRules.append(rule);
 
 	QTextCharFormat singleLineCommentFormat;
 
 	singleLineCommentFormat.setForeground(Qt::red);
 	rule.pattern = QRegularExpression("//[^\n]*");
 	rule.format = singleLineCommentFormat;
-	m_highlightingRules.append(rule);
+	m_keywordsHighlightingRules.append(rule);
 
 	m_multiLineCommentFormat.setForeground(Qt::red);
 

@@ -3,6 +3,9 @@
 #include <QTextDocumentWriter>
 #include <QDate>
 #include <QTime>
+#include <QRegularExpression>
+#include "datasources/textsources/TextFileSource.h"
+#include "helpers/WordsHelpers.h"
 
 namespace FilesHelpers {
 
@@ -70,6 +73,39 @@ bool checkFileName(const QString& fileName)
 QString generateFileName()
 {
 	return QDate::currentDate().toString("yyyyMMdd") + QTime::currentTime().toString("hhmmss") + ".html";
+}
+
+bool isFileContainWord(const QString& fileName, const QString& word)
+{
+	// TODO: + нужен поиск в тексте html (не в тегах).
+
+	QString text = readTextFromFile(fileName);
+
+	if (text.contains(word, Qt::CaseInsensitive))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
+	/*
+	QRegularExpression pattern = QRegularExpression("([А-Яа-я]|\\w)*" + word + "([А-Яа-я]|\\w)*");
+
+	QStringList words = getWordsListFromText(readTextFromFile(fileName));
+
+	foreach(const QString& fileWord, words)
+	{
+		QRegularExpressionMatchIterator matchIterator = pattern.globalMatch(fileWord);
+		if (matchIterator.hasNext())
+		{
+			return true;
+		}
+	}
+
+	return false;
+	*/
 }
 
 } // end of namespace FilesHelpers

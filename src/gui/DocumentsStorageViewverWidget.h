@@ -17,17 +17,21 @@ public:
 	explicit DocumentsStorageViewverWidget(QWidget *parent = 0);
 	~DocumentsStorageViewverWidget();
 
-	void setDocumentType(const DocumentsStorage::DocumentType& documentType);
+	void setDocumentType(const CWTypes::DocumentType& documentType);
+
+signals:
+	void searchSelectedWord(const QString& word);
 
 private:
 	Ui::DocumentsStorageViewverWidget *ui;
 
-	DocumentsStorage::DocumentType m_documentType;
+	CWTypes::DocumentType m_documentType;
 
 public slots:
 	void setModel(QAbstractListModel* model);
 	void documentSelected(QModelIndex index);
 	void test();
+	void resetText();
 };
 
 #endif // DOCUMENTSSTORAGEVIEWVERWIDGET_H

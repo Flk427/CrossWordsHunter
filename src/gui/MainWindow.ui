@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1024</width>
+    <height>768</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -329,7 +329,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1024</width>
      <height>21</height>
     </rect>
    </property>
@@ -344,6 +344,9 @@
     <property name="title">
      <string>Поиск</string>
     </property>
+    <addaction name="action"/>
+    <addaction name="action_2"/>
+    <addaction name="action_3"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
@@ -358,17 +361,32 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionLoadEvent">
    <property name="text">
-    <string>Сводку</string>
+    <string>Сводку...</string>
    </property>
   </action>
   <action name="actionLoadJournal">
    <property name="text">
-    <string>Реестр</string>
+    <string>Реестр...</string>
    </property>
   </action>
   <action name="actionQuit">
    <property name="text">
     <string>Выход</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>Совпадений</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>Отдельных слов...</string>
+   </property>
+  </action>
+  <action name="action_3">
+   <property name="text">
+    <string>Сброс</string>
    </property>
   </action>
  </widget>
@@ -415,38 +433,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>toolButton_3</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>eventsVisible(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>75</x>
-     <y>60</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_4</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>journalsVisible(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>134</x>
-     <y>60</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>actionLoadEvent</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
@@ -478,11 +464,60 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>toolButton_3</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>setEventsVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>378</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_4</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>setJournalsVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>437</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_2</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showSearchWordForm()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>loadNewEvent()</slot>
   <slot>loadNewJournal()</slot>
-  <slot>eventsVisible(bool)</slot>
-  <slot>journalsVisible(bool)</slot>
+  <slot>setJournalsVisible(bool)</slot>
+  <slot>setEventsVisible(bool)</slot>
+  <slot>showSearchWordForm()</slot>
  </slots>
 </ui>

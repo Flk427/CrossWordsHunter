@@ -14,20 +14,19 @@ DocumentsStorage::~DocumentsStorage()
 {
 }
 
-DocumentsStorage& DocumentsStorage::Instance()
-{
-	// согласно стандарту, этот код ленивый и потокобезопасный
-	static DocumentsStorage ds;
-	return ds;
-}
-
-void DocumentsStorage::readDocumentsList(DocumentType documentType)
+QStringList DocumentsStorage::getFilesList(const CWTypes::DocumentType documentType)
 {
 	QString path = getDocumentsPath(documentType);
+	QDir dir(path);
 
+	return dir.entryList(QDir::Files, QDir::Name);
+}
+
+void DocumentsStorage::setFilesList(const CWTypes::DocumentType documentType, const QStringList& filesList)
+{
 	DocumentsListModel* documentsModel;
 
-	if (documentType == DocumentType::Event)
+	if (documentType == CWTypes::DocumentType::Event)
 	{
 		documentsModel = &m_eventsModel;
 	}
@@ -36,18 +35,39 @@ void DocumentsStorage::readDocumentsList(DocumentType documentType)
 		documentsModel = &m_journalsModel;
 	}
 
-	QDir dir(path);
-
-	documentsModel->setDocumentsList(dir.entryList(QDir::Files, QDir::Name));
+	documentsModel->setDocumentsList(filesList);
 }
 
-QString DocumentsStorage::getDocumentsPath(const DocumentType documentType)
+DocumentsStorage& DocumentsStorage::Instance()
+{
+	// согласно стандарту, этот код ленивый и потокобезопасный
+	static DocumentsStorage ds;
+	return ds;
+}
+
+void DocumentsStorage::readAllDocumentsList(const CWTypes::DocumentType documentType)
+{
+	DocumentsListModel* documentsModel;
+
+	if (documentType == CWTypes::DocumentType::Event)
+	{
+		documentsModel = &m_eventsModel;
+	}
+	else
+	{
+		documentsModel = &m_journalsModel;
+	}
+
+	documentsModel->setDocumentsList(getFilesList(documentType));
+}
+
+QString DocumentsStorage::getDocumentsPath(const CWTypes::DocumentType documentType)
 {
 	ApplicationSettings& settings = ApplicationSettings::Instance();
 
 	QString containerDirName;
 
-	if (documentType == DocumentType::Event)
+	if (documentType == CWTypes::DocumentType::Event)
 	{
 		containerDirName = settings.getEventsDir();
 	}
@@ -59,19 +79,33 @@ QString DocumentsStorage::getDocumentsPath(const DocumentType documentType)
 	return settings.getDocumentsBaseDir() + QDir::separator() + containerDirName;
 }
 
-DocumentsListModel*DocumentsStorage::getDocumentsListModel(const DocumentsStorage::DocumentType documentType)
+DocumentsListModel* DocumentsStorage::getDocumentsListModel(const CWTypes::DocumentType documentType, bool filtered)
 {
-	if (documentType == DocumentType::Event)
+	if (filtered)
 	{
-		return &m_eventsModel;
+		if (documentType == CWTypes::DocumentType::Event)
+		{
+			return &m_eventsFilteredModel;
+		}
+		else
+		{
+			return &m_journalsFilteredModel;
+		}
 	}
 	else
 	{
-		return &m_journalsModel;
+		if (documentType == CWTypes::DocumentType::Event)
+		{
+			return &m_eventsModel;
+		}
+		else
+		{
+			return &m_journalsModel;
+		}
 	}
 }
 
-QString DocumentsStorage::getNewDocumentPath(const DocumentType documentType)
+QString DocumentsStorage::getNewDocumentsPath(const CWTypes::DocumentType documentType)
 {
 	return getDocumentsPath(documentType) + QDir::separator() + FilesHelpers::generateFileName();
 }
@@ -92,15 +126,20 @@ void DocumentsStorage::updateDocumentsLists()
 {
 	if (m_changed)
 	{
-		readDocumentsList(Event);
-		readDocumentsList(Journal);
-		m_changed = false;
+		readDocumentsLists();
 	}
 }
 
-bool DocumentsStorage::addDocument(DocumentType documentType, const QTextDocument* document)
+void DocumentsStorage::readDocumentsLists()
 {
-	QString fileName = getNewDocumentPath(documentType);
+	readAllDocumentsList(CWTypes::Event);
+	readAllDocumentsList(CWTypes::Journal);
+	m_changed = false;
+}
+
+bool DocumentsStorage::addDocument(CWTypes::DocumentType documentType, const QTextDocument* document)
+{
+	QString fileName = getNewDocumentsPath(documentType);
 
 	if (createDocumentDir(fileName))
 	{

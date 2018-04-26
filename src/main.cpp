@@ -7,6 +7,8 @@
 
 int main(int argc, char *argv[])
 {
+	qRegisterMetaType<QVector<int>>("QVector<int>");
+
 	QApplication a(argc, argv);
 
 	MainWindow w;

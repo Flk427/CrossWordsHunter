@@ -22,6 +22,11 @@ QVariant DocumentsListModel::data(const QModelIndex& index, int role) const
 {
 	if (role == Qt::DisplayRole)
 	{
+		if (index.row() >= m_stringList.count())
+		{
+			return QVariant();
+		}
+
 		return m_stringList.at(index.row());
 	}
 	else if (role == Qt::BackgroundRole)

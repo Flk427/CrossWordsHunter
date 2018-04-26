@@ -16,10 +16,12 @@ public:
 	~DocumentEditorWidget();
 
 signals:
+	void searchSelectedWord(const QString& word);
 
 private slots:
 	void addSelectedKeyword(bool toggled);
-	void setDocumentTextHighlighter(const QStringList& keywords);
+	void callSearchSelectedWord(bool toggled);
+	void setDocumentTextHighlighter(const QStringList& keywords, const QStringList& searchWords);
 
 private:
 	QMap<QString, QAction*> m_actionMap;

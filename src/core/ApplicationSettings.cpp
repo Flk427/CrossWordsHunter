@@ -2,18 +2,59 @@
 
 ApplicationSettings::ApplicationSettings()
 {
-	m_keywords = QStringList() << "благо" << "год";
+	m_settings = new QSettings("config.ini", QSettings::IniFormat);
+	readKeywords();
 }
 
 ApplicationSettings::~ApplicationSettings()
 {
+	delete m_settings;
+}
 
+void ApplicationSettings::readKeywords()
+{
+	m_keywords.clear();
+
+	m_settings->beginGroup("keywords");
+	const QStringList childKeys = m_settings->childKeys();
+
+	foreach (const QString &childKey, childKeys)
+	{
+		m_keywords << childKey;
+	}
+
+	m_settings->endGroup();
 }
 
 void ApplicationSettings::addKeyword(const QString& keyword)
 {
-	m_keywords.push_back(keyword);
-	emit keywordsChanged(m_keywords);
+	if (!keyword.isEmpty() && !m_keywords.contains(keyword, Qt::CaseInsensitive))
+	{
+		m_settings->beginGroup("keywords");
+		m_settings->setValue(keyword, "");
+		m_settings->endGroup();
+
+		m_keywords.push_back(keyword);
+		emit keywordsChanged(m_keywords, m_searchWords);
+	}
+}
+
+void ApplicationSettings::setSearchWord(const QString& searchWord)
+{
+	if (!searchWord.isEmpty())
+	{
+		if (!m_keywords.contains(searchWord, Qt::CaseInsensitive))
+		{
+			m_searchWords.clear();
+			m_searchWords.push_back(searchWord);
+			emit keywordsChanged(m_keywords, m_searchWords);
+		}
+	}
+	else
+	{
+		m_searchWords.clear();
+		emit keywordsChanged(m_keywords, m_searchWords);
+	}
 }
 
 ApplicationSettings& ApplicationSettings::Instance()
@@ -41,4 +82,9 @@ QString ApplicationSettings::getJournalsDir()
 const QStringList& ApplicationSettings::getKeywords()
 {
 	return m_keywords;
+}
+
+const QStringList& ApplicationSettings::getSearchWords()
+{
+	return m_searchWords;
 }

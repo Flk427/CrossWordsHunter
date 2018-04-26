@@ -41,7 +41,9 @@ SOURCES += main.cpp \
     gui/DocumentsStorageViewverWidget.cpp \
     core/DocumentsListModel.cpp \
     core/DocumentTextHighlighter.cpp \
-    gui/DocumentEditorWidget.cpp
+    gui/DocumentEditorWidget.cpp \
+    gui/SearchWordDialog.cpp \
+    core/WordFinder.cpp
 
 HEADERS += \
     helpers/WordsHelpers.h \
@@ -56,9 +58,13 @@ HEADERS += \
     gui/DocumentsStorageViewverWidget.h \
     core/DocumentsListModel.h \
     core/DocumentTextHighlighter.h \
-    gui/DocumentEditorWidget.h
+    gui/DocumentEditorWidget.h \
+    gui/SearchWordDialog.h \
+    core/WordFinder.h \
+    core/types.h
 
 FORMS += \
     gui/MainWindow.ui \
     gui/TextEditorDialog.ui \
-    gui/DocumentsStorageViewverWidget.ui
+    gui/DocumentsStorageViewverWidget.ui \
+    gui/SearchWordDialog.ui
