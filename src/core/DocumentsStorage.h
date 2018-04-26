@@ -25,7 +25,7 @@ public:
 
 	bool addDocument(CWTypes::DocumentType documentType, const QTextDocument* document);
 	QString getDocumentsPath(const CWTypes::DocumentType documentType);
-	DocumentsListModel* getDocumentsListModel(const CWTypes::DocumentType documentType, bool filtered);
+	DocumentsListModel* getDocumentsListModel(const CWTypes::DocumentType documentType);
 	QString getNewDocumentsPath(const CWTypes::DocumentType documentType);
 	QStringList getFilesList(const CWTypes::DocumentType documentType);
 	void setFilesList(const CWTypes::DocumentType documentType, const QStringList& filesList);
@@ -41,9 +41,6 @@ private:
 
 	DocumentsListModel m_eventsModel;
 	DocumentsListModel m_journalsModel;
-
-	DocumentsListModel m_eventsFilteredModel;
-	DocumentsListModel m_journalsFilteredModel;
 
 	void readAllDocumentsList(const CWTypes::DocumentType documentType);
 

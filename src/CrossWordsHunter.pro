@@ -1,4 +1,4 @@
-TARGET = CrossWords
+TARGET = CrossWordsHunter
 
 #QT -= gui
 QT += widgets
@@ -15,7 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 # Release binaries and symbols will placed at...
 CONFIG(release, release|debug) {
-    DESTDIR = $${PWD}/../bin/CrossWords
+    DESTDIR = $${PWD}/../bin/CrossWordsHunter
     message(Place release binaries to $$DESTDIR)
 
     QMAKE_PRE_LINK = "$${PWD}/../tools/mkbin.cmd"

@@ -11,7 +11,7 @@ if not exist ..\bin (
 	mkdir ..\bin
 )
 
-if not exist ..\bin\CrossWords (
-	echo make CrossWords
-	mkdir ..\bin\CrossWords
+if not exist ..\bin\CrossWordsHunter (
+	echo make CrossWordsHunter
+	mkdir ..\bin\CrossWordsHunter
 )

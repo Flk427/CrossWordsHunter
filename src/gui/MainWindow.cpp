@@ -16,8 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->eventsViewverWidget->setDocumentType(CWTypes::Event);
 	ui->journalsViewverWidget->setDocumentType(CWTypes::Journal);
 
-	ui->eventsViewverWidget->setModel(DocumentsStorage::Instance().getDocumentsListModel(CWTypes::Event, false));
-	ui->journalsViewverWidget->setModel(DocumentsStorage::Instance().getDocumentsListModel(CWTypes::Journal, false));
+	ui->eventsViewverWidget->setModel(DocumentsStorage::Instance().getDocumentsListModel(CWTypes::Event));
+	ui->journalsViewverWidget->setModel(DocumentsStorage::Instance().getDocumentsListModel(CWTypes::Journal));
 
 	connect(&DocumentsStorage::Instance(), &DocumentsStorage::storageUpdatedNotice, this, &MainWindow::updateStatus);
 	connect(ui->eventsViewverWidget, &DocumentsStorageViewverWidget::searchSelectedWord, this, &MainWindow::showSearchWordForm);

@@ -7,6 +7,6 @@ echo QT: %qt%
 %~d0
 cd %~dp0
 
-cd ../bin/CrossWords
-%qt%\bin\windeployqt.exe CrossWords.exe
+cd ../bin/CrossWordsHunter
+%qt%\bin\windeployqt.exe CrossWordsHunter.exe
 xcopy /E /Y ..\..\examples\Storage .\Storage\

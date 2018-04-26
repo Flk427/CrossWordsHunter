@@ -15,7 +15,7 @@ WordFinder::WordFinder(const CWTypes::DocumentType documentType, const QString& 
 void WordFinder::process()
 {
 	QDir dir(m_path);
-	QStringList files = dir.entryList(QDir::Files, QDir::Name);
+	QStringList files = dir.entryList(QDir::Files, QDir::Name | QDir::Reversed | QDir::IgnoreCase);
 
 	QStringList result;
 

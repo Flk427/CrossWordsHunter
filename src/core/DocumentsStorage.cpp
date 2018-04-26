@@ -19,7 +19,7 @@ QStringList DocumentsStorage::getFilesList(const CWTypes::DocumentType documentT
 	QString path = getDocumentsPath(documentType);
 	QDir dir(path);
 
-	return dir.entryList(QDir::Files, QDir::Name);
+	return dir.entryList(QDir::Files, QDir::Name | QDir::Reversed | QDir::IgnoreCase);
 }
 
 void DocumentsStorage::setFilesList(const CWTypes::DocumentType documentType, const QStringList& filesList)
@@ -79,29 +79,15 @@ QString DocumentsStorage::getDocumentsPath(const CWTypes::DocumentType documentT
 	return settings.getDocumentsBaseDir() + QDir::separator() + containerDirName;
 }
 
-DocumentsListModel* DocumentsStorage::getDocumentsListModel(const CWTypes::DocumentType documentType, bool filtered)
+DocumentsListModel* DocumentsStorage::getDocumentsListModel(const CWTypes::DocumentType documentType)
 {
-	if (filtered)
+	if (documentType == CWTypes::DocumentType::Event)
 	{
-		if (documentType == CWTypes::DocumentType::Event)
-		{
-			return &m_eventsFilteredModel;
-		}
-		else
-		{
-			return &m_journalsFilteredModel;
-		}
+		return &m_eventsModel;
 	}
 	else
 	{
-		if (documentType == CWTypes::DocumentType::Event)
-		{
-			return &m_eventsModel;
-		}
-		else
-		{
-			return &m_journalsModel;
-		}
+		return &m_journalsModel;
 	}
 }
 

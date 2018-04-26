@@ -6,8 +6,8 @@
 #include "../../src/datasources/textsources/TextFileSource.h"
 #include "../../src/helpers/DevelHelpers.h"
 
-static const char* text1 = "D:\\_private\\projects\\volkov\\CrossWords\\tests\\data\\text1.txt";
-static const char* text2 = "D:\\_private\\projects\\volkov\\CrossWords\\tests\\data\\text2.txt";
+static const char* text1 = "D:\\_private\\projects\\volkov\\CrossWordsHunter\\tests\\data\\text1.txt";
+static const char* text2 = "D:\\_private\\projects\\volkov\\CrossWordsHunter\\tests\\data\\text2.txt";
 
 void test()
 {
