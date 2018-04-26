@@ -13,7 +13,7 @@ void DocumentsListModel::setDocumentsList(const QStringList& stringList)
 	dataChanged(createIndex(0, 0), createIndex(m_stringList.count() - 1, 0));
 }
 
-int DocumentsListModel::rowCount(const QModelIndex& parent) const
+int DocumentsListModel::rowCount(const QModelIndex&) const
 {
 	return m_stringList.count();
 }
