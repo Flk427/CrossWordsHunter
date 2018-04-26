@@ -44,15 +44,21 @@
       </item>
       <item>
        <widget class="QToolButton" name="toolButton_3">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
-         <string>Edit</string>
+         <string>Переименовать</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QToolButton" name="toolButton_4">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
-         <string>Del</string>
+         <string>Удалить</string>
         </property>
        </widget>
       </item>

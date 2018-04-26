@@ -69,10 +69,10 @@ void DocumentEditorWidget::contextMenuEvent(QContextMenuEvent* event)
 
 	if(cursor.hasSelection())
 	{
-		m_actionMap["addKeyword"]->setText("Add keyword: \"" + cursor.selectedText() + "\"");
+		m_actionMap["addKeyword"]->setText("Добавить ключевое слово: \"" + cursor.selectedText() + "\"");
 		menu->insertAction(menu->actions().at(0), m_actionMap["addKeyword"]);
 
-		m_actionMap["searchWord"]->setText("Search keyword: \"" + cursor.selectedText() + "\"");
+		m_actionMap["searchWord"]->setText("Искать фрагмент текста: \"" + cursor.selectedText() + "\"");
 		menu->insertAction(menu->actions().at(1), m_actionMap["searchWord"]);
 
 		menu->insertSeparator(menu->actions().at(2));
