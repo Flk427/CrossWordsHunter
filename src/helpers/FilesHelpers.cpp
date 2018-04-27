@@ -4,6 +4,9 @@
 #include <QDate>
 #include <QTime>
 #include <QRegularExpression>
+#include <QTextCodec>
+#include <QTextCursor>
+#include <QTextDocument>
 #include "datasources/textsources/TextFileSource.h"
 #include "helpers/WordsHelpers.h"
 
@@ -75,10 +78,60 @@ QString generateFileName()
 	return QDate::currentDate().toString("yyyyMMdd") + QTime::currentTime().toString("hhmmss") + ".html";
 }
 
+bool readDocument(const QString& fileName, QTextDocument& document)
+{
+	QFile f(fileName);
+
+	if (f.open(QFile::ReadOnly))
+	{
+		QByteArray data = f.readAll();
+		f.close();
+
+		QTextCodec *codec = Qt::codecForHtml(data);
+		QString str = codec->toUnicode(data);
+
+		if (Qt::mightBeRichText(str))
+		{
+			document.setHtml(str);
+		}
+		else
+		{
+			str = QString::fromLocal8Bit(data);
+			document.setPlainText(str);
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
 bool isFileContainWord(const QString& fileName, const QString& word)
 {
-	// TODO: + нужен поиск в тексте html (не в тегах).
+	// Поиск в тексте html (не в тегах).
 
+	QFile f(fileName);
+
+	QTextDocument document;
+
+	if (readDocument(fileName, document))
+	{
+//		if (document.toPlainText().contains(word, Qt::CaseInsensitive))
+//		{
+//			return true;
+//		}
+
+		QTextCursor cursor = document.find(word, 0, 0);
+
+		if (!cursor.isNull())
+		{
+			return true;
+		}
+	}
+
+	return false;
+
+	/*
 	QString text = readTextFromFile(fileName);
 
 	if (text.contains(word, Qt::CaseInsensitive))
@@ -89,6 +142,7 @@ bool isFileContainWord(const QString& fileName, const QString& word)
 	{
 		return false;
 	}
+	*/
 
 	/*
 	QRegularExpression pattern = QRegularExpression("([А-Яа-я]|\\w)*" + word + "([А-Яа-я]|\\w)*");
