@@ -17,6 +17,9 @@ public:
 
 	int value();
 
+signals:
+	void closed();
+
 public slots:
 	void setValue(int value);
 	void incrementValue();
@@ -25,6 +28,10 @@ public slots:
 
 private:
 	Ui::ProgressBarWidget *ui;
+
+	// QWidget interface
+protected:
+	virtual void closeEvent(QCloseEvent* event) override;
 };
 
 #endif // PROGRESSBARWIDGET_H

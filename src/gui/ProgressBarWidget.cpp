@@ -38,3 +38,9 @@ void ProgressBarWidget::setState(int value, int maximum)
 	setMaximum(maximum);
 	setValue(value);
 }
+
+
+void ProgressBarWidget::closeEvent(QCloseEvent* event)
+{
+	emit closed();
+}
