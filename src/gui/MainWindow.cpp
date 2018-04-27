@@ -4,6 +4,7 @@
 #include "helpers/FilesHelpers.h"
 #include "core/DocumentsStorage.h"
 #include "core/ApplicationSettings.h"
+#include "core/WordsOccurence.h"
 
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
@@ -25,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->eventsViewverWidget, &DocumentsStorageViewverWidget::searchSelectedWord, this, &MainWindow::showSearchWordForm);
 	connect(ui->journalsViewverWidget, &DocumentsStorageViewverWidget::searchSelectedWord, this, &MainWindow::showSearchWordForm);
 	connect(ui->action_3, &QAction::triggered, this, &MainWindow::searchReset);
+	connect(ui->action, &QAction::triggered, this, &MainWindow::test);
 
 	DocumentsStorage::Instance().updateDocumentsLists();
 }
@@ -105,6 +107,43 @@ void MainWindow::on_actionQuit_triggered()
 {
 	// Эта штука автоматически связывается через QMetaObject::connectSlotsByName(MainWindow);
 	close();
+}
+
+void MainWindow::test()
+{
+//	WordsOccurence* wo = new WordsOccurence(DocumentsStorage::Instance().getDocumentsPath(CWTypes::DocumentType::Event),
+//											DocumentsStorage::Instance().getDocumentsPath(CWTypes::DocumentType::Journal),
+//											nullptr);
+//	wo->process();
+//	wo->deleteLater();
+
+	QThread* searchThread = new QThread(this);
+	WordsOccurence* wordFinder = new WordsOccurence(DocumentsStorage::Instance().getDocumentsPath(CWTypes::DocumentType::Event),
+													DocumentsStorage::Instance().getDocumentsPath(CWTypes::DocumentType::Journal),
+													nullptr);
+
+	wordFinder->moveToThread(searchThread);
+
+	connect(wordFinder, &WordsOccurence::progress, &m_pb, &ProgressBarWidget::setState);
+
+	// Соединяем сигнал started потока, со слотом process "рабочего" класса, т.е. начинается выполнение нужной работы.
+	connect(searchThread, &QThread::started, wordFinder, &WordsOccurence::process);
+
+	// По завершению выходим из потока, и удаляем рабочий класс
+	connect(wordFinder, &WordsOccurence::finished, searchThread, &QThread::quit);
+	connect(wordFinder, &WordsOccurence::finished, wordFinder, &WordsOccurence::deleteLater);
+	connect(wordFinder, &WordsOccurence::finished, &m_pb, &QWidget::hide);
+
+	connect(&m_pb, &ProgressBarWidget::closed, wordFinder, &WordsOccurence::stop, Qt::ConnectionType::DirectConnection);
+
+	// Удаляем поток, после выполнения операции
+	connect(searchThread, &QThread::finished, searchThread, &SearchWordDialog::deleteLater);
+
+	m_pb.setParent(this);
+	m_pb.setWindowFlags(Qt::Dialog);
+	m_pb.setWindowModality(Qt::WindowModality::WindowModal);
+	m_pb.show();
+	searchThread->start();
 }
 
 //void MainWindow::on_actionLoadEvent_triggered()

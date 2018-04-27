@@ -344,8 +344,8 @@
     <property name="title">
      <string>Поиск</string>
     </property>
-    <addaction name="action"/>
     <addaction name="action_2"/>
+    <addaction name="action"/>
     <addaction name="action_3"/>
    </widget>
    <widget class="QMenu" name="menu_3">

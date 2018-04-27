@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTextDocument>
 #include "gui/SearchWordDialog.h"
+#include "gui/ProgressBarWidget.h"
 
 namespace Ui {
 class MainWindow;
@@ -36,6 +37,9 @@ private:
 	Ui::MainWindow *ui;
 
 	SearchWordDialog* m_searchWordDialog;
+
+	ProgressBarWidget m_pb;
+	void test();
 };
 
 #endif // MAINWINDOW_H
