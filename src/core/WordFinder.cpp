@@ -26,7 +26,7 @@ void WordFinder::process()
 			result << fileName;
 		}
 
-		emit fileProcessed();
+		emit progress();
 	}
 
 	DocumentsStorage::Instance().setFilesList(m_documentType, result);

@@ -45,7 +45,6 @@ private:
 	// QDialog interface
 public slots:
 	virtual int exec(const QStringList& keywords);
-	void incrementProgressBarPosition();
 
 	// QWidget interface
 protected:

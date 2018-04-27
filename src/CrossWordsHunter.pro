@@ -45,7 +45,9 @@ SOURCES += main.cpp \
     core/DocumentTextHighlighter.cpp \
     gui/DocumentEditorWidget.cpp \
     gui/SearchWordDialog.cpp \
-    core/WordFinder.cpp
+    core/WordFinder.cpp \
+    core/WordsOccurence.cpp \
+    gui/ProgressBarWidget.cpp
 
 HEADERS += \
     helpers/WordsHelpers.h \
@@ -63,13 +65,16 @@ HEADERS += \
     gui/DocumentEditorWidget.h \
     gui/SearchWordDialog.h \
     core/WordFinder.h \
-    core/types.h
+    core/types.h \
+    core/WordsOccurence.h \
+    gui/ProgressBarWidget.h
 
 FORMS += \
     gui/MainWindow.ui \
     gui/TextEditorDialog.ui \
     gui/DocumentsStorageViewverWidget.ui \
-    gui/SearchWordDialog.ui
+    gui/SearchWordDialog.ui \
+    gui/ProgressBarWidget.ui
 
 DISTFILES += \
     CrossWordsHunter.rc

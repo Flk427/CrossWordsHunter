@@ -13,7 +13,7 @@ SearchWordDialog::SearchWordDialog(QWidget *parent) :
 	connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &SearchWordDialog::startSearch);
 	connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
-	ui->frame_2->setVisible(false);
+	ui->progressWidget->setVisible(false);
 }
 
 SearchWordDialog::~SearchWordDialog()
@@ -40,13 +40,13 @@ void SearchWordDialog::startSearchWord(const QString& word)
 		m_canClose = false;
 
 		ui->frame->setVisible(false);
-		ui->frame_2->setVisible(true);
+		ui->progressWidget->setVisible(true);
 
 		QStringList events = DocumentsStorage::Instance().getFilesList(CWTypes::Event);
 		QStringList journals = DocumentsStorage::Instance().getFilesList(CWTypes::Journal);
 
-		ui->progressBar->setMaximum(events.count() + journals.count());
-		ui->progressBar->setValue(0);
+		ui->progressWidget->setMaximum(events.count() + journals.count());
+		ui->progressWidget->setValue(0);
 
 		QString eventsPath = DocumentsStorage::Instance().getDocumentsPath(CWTypes::Event);
 		QString journalsPath = DocumentsStorage::Instance().getDocumentsPath(CWTypes::Journal);
@@ -88,7 +88,7 @@ void SearchWordDialog::createSearchThread(
 
 	wordFinder->moveToThread(searchThread);
 
-	connect(wordFinder, &WordFinder::fileProcessed, this, &SearchWordDialog::incrementProgressBarPosition);
+	connect(wordFinder, &WordFinder::progress, ui->progressWidget, &ProgressBarWidget::incrementValue);
 
 	// Соединяем сигнал started потока, со слотом process "рабочего" класса, т.е. начинается выполнение нужной работы.
 	connect(searchThread, &QThread::started, wordFinder, &WordFinder::process);
@@ -113,18 +113,13 @@ void SearchWordDialog::createSearchThread(
 int SearchWordDialog::exec(const QStringList& keywords)
 {
 	ui->frame->setVisible(true);
-	ui->frame_2->setVisible(false);
+	ui->progressWidget->setVisible(false);
 
 	ui->comboBox->clear();
 	ui->comboBox->insertItems(0, keywords);
 	ui->comboBox->setCurrentIndex(-1);
 	ui->comboBox->setFocus();
 	return exec();
-}
-
-void SearchWordDialog::incrementProgressBarPosition()
-{
-	ui->progressBar->setValue(ui->progressBar->value() + 1);
 }
 
 void SearchWordDialog::closeEvent(QCloseEvent* event)

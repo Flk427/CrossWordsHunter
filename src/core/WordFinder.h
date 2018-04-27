@@ -1,5 +1,5 @@
-#ifndef SEARCHWORD_H
-#define SEARCHWORD_H
+#ifndef WORDFINDER_H
+#define WORDFINDER_H
 
 #include <QObject>
 #include "core/types.h"
@@ -11,7 +11,7 @@ public:
 	explicit WordFinder(const CWTypes::DocumentType documentType, const QString& path, const QString& word, QObject *parent);
 
 signals:
-	void fileProcessed();
+	void progress();
 	void finished();
 
 public slots:
@@ -23,4 +23,4 @@ private:
 	QString m_word;
 };
 
-#endif // SEARCHWORD_H
+#endif // WORDFINDER_H
