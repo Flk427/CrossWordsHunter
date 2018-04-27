@@ -81,6 +81,7 @@ QString generateFileName()
 bool readDocument(const QString& fileName, QTextDocument& document)
 {
 	QFile f(fileName);
+	document.clear();
 
 	if (f.open(QFile::ReadOnly))
 	{

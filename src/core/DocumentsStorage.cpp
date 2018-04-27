@@ -19,7 +19,7 @@ QStringList DocumentsStorage::getFilesList(const CWTypes::DocumentType documentT
 	QString path = getDocumentsPath(documentType);
 	QDir dir(path);
 
-	return dir.entryList(QDir::Files, QDir::Name | QDir::Reversed | QDir::IgnoreCase);
+	return dir.entryList(QDir::Files, QDir::Name | QDir::Reversed);
 }
 
 void DocumentsStorage::setFilesList(const CWTypes::DocumentType documentType, const QStringList& filesList)

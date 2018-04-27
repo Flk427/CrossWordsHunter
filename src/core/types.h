@@ -12,10 +12,10 @@ enum DocumentType {Event, Journal};
 
 typedef struct
 {
-	int eventsOccuring;
-	int journalsOccuring;
-	QStringList events;
-	QStringList journals;
+	int firstOccuring;
+	int secondOccuring;
+	QStringList firstFiles;
+	QStringList secondFiles;
 } WordOccuring;
 
 typedef QMap<QString, WordOccuring> WordsOccuring;

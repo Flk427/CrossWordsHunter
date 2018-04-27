@@ -15,8 +15,7 @@ WordFinder::WordFinder(const CWTypes::DocumentType documentType, const QString& 
 void WordFinder::process()
 {
 	QDir dir(m_path);
-	QStringList files = dir.entryList(QDir::Files, QDir::Name | QDir::Reversed | QDir::IgnoreCase);
-
+	QStringList files = dir.entryList(QDir::Files, QDir::Name | QDir::Reversed);
 	QStringList result;
 
 	foreach (const QString& fileName, files)
@@ -30,8 +29,5 @@ void WordFinder::process()
 	}
 
 	DocumentsStorage::Instance().setFilesList(m_documentType, result);
-
-	qDebug() << "Файлов: " << result.count();
-
 	emit finished();
 }
