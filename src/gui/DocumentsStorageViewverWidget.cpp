@@ -3,6 +3,7 @@
 
 #include <QDir>
 #include <QTextEdit>
+#include <QTextCodec>
 
 DocumentsStorageViewverWidget::DocumentsStorageViewverWidget(QWidget *parent) :
 	QWidget(parent),
@@ -39,9 +40,21 @@ void DocumentsStorageViewverWidget::documentSelected(QModelIndex index)
 
 	if (f.open(QFile::ReadOnly))
 	{
-		QString html = QString(f.readAll());
-		ui->textEdit->setHtml(html);
+		QByteArray data = f.readAll();
 		f.close();
+
+		QTextCodec *codec = Qt::codecForHtml(data);
+		QString str = codec->toUnicode(data);
+
+		if (Qt::mightBeRichText(str))
+		{
+			ui->textEdit->setHtml(str);
+		}
+		else
+		{
+			str = QString::fromLocal8Bit(data);
+			ui->textEdit->setPlainText(str);
+		}
 	}
 }
 
