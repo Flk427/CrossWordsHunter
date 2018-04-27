@@ -76,13 +76,13 @@ void DocumentTextHighlighter::highlightBlock(const QString& text)
 //		}
 
 		int length;
-		int index = text.indexOf(rule.pattern.pattern(), Qt::CaseInsensitive);
+		int index = text.toUpper().indexOf(rule.pattern.pattern().toUpper(), Qt::CaseInsensitive);
 
 		while (index >= 0)
 		{
 			length = rule.pattern.pattern().length();
 			setFormat(index, length, rule.format);
-			index = text.indexOf(rule.pattern.pattern(), index + length, Qt::CaseInsensitive);
+			index = text.toUpper().indexOf(rule.pattern.pattern().toUpper(), index + length, Qt::CaseInsensitive);
 		}
 	}
 
