@@ -48,7 +48,8 @@ SOURCES += main.cpp \
     core/WordFinder.cpp \
     core/WordsOccurence.cpp \
     gui/ProgressBarWidget.cpp \
-    core/WordsOccurenceTableModel.cpp
+    core/WordsOccurenceTableModel.cpp \
+    gui/WordsOccurenceTableWidget.cpp
 
 HEADERS += \
     helpers/WordsHelpers.h \
@@ -69,14 +70,16 @@ HEADERS += \
     core/types.h \
     core/WordsOccurence.h \
     gui/ProgressBarWidget.h \
-    core/WordsOccurenceTableModel.h
+    core/WordsOccurenceTableModel.h \
+    gui/WordsOccurenceTableWidget.h
 
 FORMS += \
     gui/MainWindow.ui \
     gui/TextEditorDialog.ui \
     gui/DocumentsStorageViewverWidget.ui \
     gui/SearchWordDialog.ui \
-    gui/ProgressBarWidget.ui
+    gui/ProgressBarWidget.ui \
+    gui/WordsOccurenceTableWidget.ui
 
 DISTFILES += \
     CrossWordsHunter.rc
