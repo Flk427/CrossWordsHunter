@@ -30,6 +30,8 @@ void SearchWordDialog::startSearchWord(const QString& word)
 {
 	if (!word.isEmpty())
 	{
+		setWindowTitle("Идёт поиск...");
+
 		if (!isVisible())
 		{
 			show();
@@ -112,6 +114,8 @@ void SearchWordDialog::createSearchThread(
 
 int SearchWordDialog::exec(const QStringList& keywords)
 {
+	setWindowTitle("Поиск фрагмента текста");
+
 	ui->frame->setVisible(true);
 	ui->progressWidget->setVisible(false);
 
