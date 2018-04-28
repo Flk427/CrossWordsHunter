@@ -6,6 +6,7 @@
 
 #include "core/DocumentsListModel.h"
 #include "core/types.h"
+#include "core/WordsOccurenceTableModel.h"
 
 typedef struct
 {
@@ -26,6 +27,7 @@ public:
 	bool addDocument(CWTypes::DocumentType documentType, const QTextDocument* document);
 	QString getDocumentsPath(const CWTypes::DocumentType documentType);
 	DocumentsListModel* getDocumentsListModel(const CWTypes::DocumentType documentType);
+	WordsOccurenceTableModel* getWordsOccurenceTableModel();
 	QString getNewDocumentsPath(const CWTypes::DocumentType documentType);
 	QStringList getFilesList(const CWTypes::DocumentType documentType);
 	void setFilesList(const CWTypes::DocumentType documentType, const QStringList& filesList);
@@ -41,6 +43,7 @@ private:
 
 	DocumentsListModel m_eventsModel;
 	DocumentsListModel m_journalsModel;
+	WordsOccurenceTableModel m_wordsOccurenceTableModel;
 
 	void readAllDocumentsList(const CWTypes::DocumentType documentType);
 

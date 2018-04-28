@@ -91,6 +91,11 @@ DocumentsListModel* DocumentsStorage::getDocumentsListModel(const CWTypes::Docum
 	}
 }
 
+WordsOccurenceTableModel*DocumentsStorage::getWordsOccurenceTableModel()
+{
+	return &m_wordsOccurenceTableModel;
+}
+
 QString DocumentsStorage::getNewDocumentsPath(const CWTypes::DocumentType documentType)
 {
 	return getDocumentsPath(documentType) + QDir::separator() + FilesHelpers::generateFileName();
