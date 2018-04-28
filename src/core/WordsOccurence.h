@@ -16,6 +16,7 @@ public:
 signals:
 	void progress(int current, int total);
 	void finished();
+	void wordsFound(const CWTypes::WordsOccuring* wordsOccuring);
 
 public slots:
 	void process();

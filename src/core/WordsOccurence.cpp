@@ -11,6 +11,7 @@ WordsOccurence::WordsOccurence(const QString& dir1, const QString& dir2, QObject
 	  m_dir1(dir1),
 	  m_dir2(dir2)
 {
+	qRegisterMetaType<CWTypes::WordsOccuring>("CWTypes::WordsOccuring");
 }
 
 void WordsOccurence::process()
@@ -88,6 +89,7 @@ void WordsOccurence::process()
 		}
 	}
 
+	emit wordsFound(&m_wordsOccuring);
 	emit finished();
 }
 
