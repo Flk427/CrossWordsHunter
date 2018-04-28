@@ -40,7 +40,7 @@ void ProgressBarWidget::setState(int value, int maximum)
 }
 
 
-void ProgressBarWidget::closeEvent(QCloseEvent* event)
+void ProgressBarWidget::closeEvent(QCloseEvent*)
 {
 	emit closed();
 }
