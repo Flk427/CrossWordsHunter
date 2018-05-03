@@ -19,6 +19,7 @@ bool saveFileAs(QWidget* parent, const QTextDocument* document);
 bool saveFileWithCheckName(QWidget* parent, const QTextDocument* document, QString fileName);
 bool readDocument(const QString& fileName, QTextDocument& document);
 bool isFileContainWord(const QString& fileName, const QString& word);
+bool isFileContainWords(const QString& fileName, const QStringList& words);
 
 }
 

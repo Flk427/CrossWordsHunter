@@ -163,4 +163,28 @@ bool isFileContainWord(const QString& fileName, const QString& word)
 	*/
 }
 
+bool isFileContainWords(const QString& fileName, const QStringList& words)
+{
+	// Поиск в тексте html (не в тегах).
+
+	QFile f(fileName);
+
+	QTextDocument document;
+
+	if (readDocument(fileName, document))
+	{
+		foreach (const QString& word, words)
+		{
+			QTextCursor cursor = document.find(word, 0, 0);
+
+			if (!cursor.isNull())
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
 } // end of namespace FilesHelpers

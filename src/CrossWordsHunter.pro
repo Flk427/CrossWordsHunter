@@ -49,7 +49,8 @@ SOURCES += main.cpp \
     core/WordsOccurence.cpp \
     gui/ProgressBarWidget.cpp \
     core/WordsOccurenceTableModel.cpp \
-    gui/WordsOccurenceTableWidget.cpp
+    gui/WordsOccurenceTableWidget.cpp \
+    core/KeywordsFinder.cpp
 
 HEADERS += \
     helpers/WordsHelpers.h \
@@ -71,7 +72,8 @@ HEADERS += \
     core/WordsOccurence.h \
     gui/ProgressBarWidget.h \
     core/WordsOccurenceTableModel.h \
-    gui/WordsOccurenceTableWidget.h
+    gui/WordsOccurenceTableWidget.h \
+    core/KeywordsFinder.h
 
 FORMS += \
     gui/MainWindow.ui \

@@ -30,6 +30,8 @@ public slots:
 
 private slots:
 	void on_actionQuit_triggered();
+	void searchConjunction();
+	void searchKeywords();
 
 //	void on_actionLoadEvent_triggered();
 
@@ -39,7 +41,6 @@ private:
 	SearchWordDialog* m_searchWordDialog;
 
 	ProgressBarWidget m_pb;
-	void test();
 };
 
 #endif // MAINWINDOW_H
