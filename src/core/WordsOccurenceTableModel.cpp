@@ -56,9 +56,12 @@ void WordsOccurenceTableModel::setItems(const CWTypes::WordsOccuring* wordsOccur
 //		return (a.occuring.firstOccuring + a.occuring.secondOccuring) < (b.occuring.firstOccuring + b.occuring.secondOccuring);
 //	});
 
-	insertRows(0, m_wordsOccuring.count() - 1, QModelIndex());
+	if (!m_wordsOccuring.empty())
+	{
+		insertRows(0, m_wordsOccuring.count() - 1, QModelIndex());
+		dataChanged(index(0, 0), index(m_wordsOccuring.count() - 1, 2));
+	}
 
-	dataChanged(index(0, 0), index(m_wordsOccuring.count() - 1, 2));
 	layoutChanged();
 }
 
