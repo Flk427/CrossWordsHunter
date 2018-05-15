@@ -2,6 +2,7 @@
 #include <QMenu>
 #include <QContextMenuEvent>
 #include "core/ApplicationSettings.h"
+#include "core/KeywordsListModel.h"
 
 DocumentEditorWidget::DocumentEditorWidget(QWidget *parent) :
 	QTextEdit(parent)
@@ -10,9 +11,11 @@ DocumentEditorWidget::DocumentEditorWidget(QWidget *parent) :
 
 	m_documentTextHighlighter = new DocumentTextHighlighter(this);
 
-	setDocumentTextHighlighter(ApplicationSettings::Instance().getKeywords(), ApplicationSettings::Instance().getSearchWords());
+	setKeywordsHighlighter(KeywordsListModel::Instance().keywords());
+	setSearchWordsHighlighter(ApplicationSettings::Instance().getSearchWords());
 
-	connect(&ApplicationSettings::Instance(), &ApplicationSettings::keywordsChanged, this, &DocumentEditorWidget::setDocumentTextHighlighter);
+	connect(&ApplicationSettings::Instance(), &ApplicationSettings::searchWordsChanged, this, &DocumentEditorWidget::setSearchWordsHighlighter);
+	connect(&KeywordsListModel::Instance(), &KeywordsListModel::keywordsListChanged, this, &DocumentEditorWidget::setKeywordsHighlighter);
 
 	createActions();
 }
@@ -31,7 +34,7 @@ void DocumentEditorWidget::addSelectedKeyword(bool)
 
 	if(textCursor().hasSelection())
 	{
-		ApplicationSettings::Instance().addKeyword(textCursor().selectedText());
+		KeywordsListModel::Instance().addKeyword(textCursor().selectedText());
 	}
 }
 
@@ -43,9 +46,13 @@ void DocumentEditorWidget::callSearchSelectedWord(bool)
 	}
 }
 
-void DocumentEditorWidget::setDocumentTextHighlighter(const QStringList& keywords, const QStringList& searchWords)
+void DocumentEditorWidget::setKeywordsHighlighter(const QStringList& keywords)
 {
 	m_documentTextHighlighter->setKeywords(keywords, DocumentTextHighlighter::htKeyword);
+}
+
+void DocumentEditorWidget::setSearchWordsHighlighter(const QStringList& searchWords)
+{
 	m_documentTextHighlighter->setKeywords(searchWords, DocumentTextHighlighter::htSearch);
 }
 

@@ -96,24 +96,7 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>listView</sender>
-   <signal>doubleClicked(QModelIndex)</signal>
-   <receiver>DocumentsStorageViewverWidget</receiver>
-   <slot>documentSelected(QModelIndex)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>157</x>
-     <y>173</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>327</x>
-     <y>316</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>documentSelected(QModelIndex)</slot>
  </slots>

@@ -12,8 +12,8 @@ class DocumentEditorWidget : public QTextEdit
 	Q_OBJECT
 
 public:
-	explicit DocumentEditorWidget(QWidget *parent = 0);
-	~DocumentEditorWidget();
+	explicit DocumentEditorWidget(QWidget *parent = nullptr);
+	~DocumentEditorWidget() override;
 
 signals:
 	void searchSelectedWord(const QString& word);
@@ -21,7 +21,8 @@ signals:
 private slots:
 	void addSelectedKeyword(bool toggled);
 	void callSearchSelectedWord(bool toggled);
-	void setDocumentTextHighlighter(const QStringList& keywords, const QStringList& searchWords);
+	void setKeywordsHighlighter(const QStringList& keywords);
+	void setSearchWordsHighlighter(const QStringList& searchWords);
 
 private:
 	QMap<QString, QAction*> m_actionMap;

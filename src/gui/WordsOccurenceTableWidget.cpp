@@ -46,8 +46,8 @@ void WordsOccurenceTableWidget::wordDblClicked(QModelIndex index)
 
 		if (!wordInfo.word.isEmpty())
 		{
-			DocumentsStorage::Instance().setFilesList(CWTypes::Event, wordInfo.occuring.firstFiles);
-			DocumentsStorage::Instance().setFilesList(CWTypes::Journal, wordInfo.occuring.secondFiles);
+			DocumentsStorage::Instance().setDocumentsList(CWTypes::Event, wordInfo.occuring.firstFiles);
+			DocumentsStorage::Instance().setDocumentsList(CWTypes::Journal, wordInfo.occuring.secondFiles);
 			ApplicationSettings::Instance().setSearchWord(word);
 			emit wordSelectionChanged();
 		}

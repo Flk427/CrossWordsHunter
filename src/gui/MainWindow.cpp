@@ -6,6 +6,7 @@
 #include "core/ApplicationSettings.h"
 #include "core/WordsOccurence.h"
 #include "core/KeywordsFinder.h"
+#include "core/KeywordsListModel.h"
 
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
@@ -16,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_searchWordDialog = new SearchWordDialog(this);
 
 	ui->setupUi(this);
+	setWindowTitle("CrossWordsHunter");
 
 	ui->tabWidget->setCurrentIndex(0);
 	ui->wordsOccurenceTableWidget->hide();
@@ -91,7 +93,7 @@ void MainWindow::showSearchWordForm(const QString& word)
 {
 	if (word.isEmpty())
 	{
-		if (m_searchWordDialog->exec(ApplicationSettings::Instance().getKeywords()) == QDialog::Accepted)
+		if (m_searchWordDialog->exec(KeywordsListModel::Instance().keywords()) == QDialog::Accepted)
 		{
 			ui->wordsOccurenceTableWidget->hide();
 			resetDocuments();

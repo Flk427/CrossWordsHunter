@@ -2,6 +2,7 @@
 #include "core/ApplicationSettings.h"
 #include "helpers/FilesHelpers.h"
 #include "core/DocumentsStorage.h"
+#include "core/KeywordsListModel.h"
 
 KeywordsFinder::KeywordsFinder(QObject *parent) : QObject(parent)
 {
@@ -45,7 +46,7 @@ void KeywordsFinder::findKeywords(const QString& path, const QStringList& files,
 			return;
 		}
 
-		if (FilesHelpers::isFileContainWords(path + QDir::separator() + fileName, ApplicationSettings::Instance().getKeywords()))
+		if (FilesHelpers::isFileContainWords(path + QDir::separator() + fileName, KeywordsListModel::Instance().keywords()))
 		{
 			result << fileName;
 		}
@@ -55,5 +56,5 @@ void KeywordsFinder::findKeywords(const QString& path, const QStringList& files,
 		emit reportState(m_current, m_count);
 	}
 
-	DocumentsStorage::Instance().setFilesList(type, result);
+	DocumentsStorage::Instance().setDocumentsList(type, result);
 }

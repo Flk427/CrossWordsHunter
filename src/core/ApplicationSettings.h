@@ -15,16 +15,14 @@ public:
 	QString getDocumentsBaseDir();
 	QString getEventsDir();
 	QString getJournalsDir();
-	const QStringList& getKeywords();
 	const QStringList& getSearchWords();
 
 private:
-	ApplicationSettings();  // конструктор недоступен
+	ApplicationSettings(); // конструктор недоступен
 	~ApplicationSettings(); // и деструктор
 
 	QSettings* m_settings;
 
-	QStringList m_keywords;
 	QStringList m_searchWords;
 
 	// необходимо также запретить копирование
@@ -32,11 +30,12 @@ private:
 	ApplicationSettings& operator= (ApplicationSettings const&);  // и тут
 
 signals:
-	void keywordsChanged(const QStringList& keywords, const QStringList& searchWords);
+	void searchWordsChanged(const QStringList& searchWords);
 
 public slots:
-	void readKeywords();
+	QStringList readKeywords();
 	void addKeyword(const QString& keyword);
+	void removeKeyword(const QString& keyword);
 	void setSearchWord(const QString& searchWord);
 };
 

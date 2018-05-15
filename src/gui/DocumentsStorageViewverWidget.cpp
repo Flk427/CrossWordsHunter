@@ -13,6 +13,7 @@ DocumentsStorageViewverWidget::DocumentsStorageViewverWidget(QWidget *parent) :
 
 	m_documentType = CWTypes::Event;
 	connect(ui->textEdit, &DocumentEditorWidget::searchSelectedWord, this, &DocumentsStorageViewverWidget::searchSelectedWord);
+	connect(ui->listView, &QListView::doubleClicked, this, &DocumentsStorageViewverWidget::documentSelected);
 
 //	connect(ui->textEdit, &QTextEdit::cursorPositionChanged, this, &DocumentsStorageViewverWidget::test);
 }

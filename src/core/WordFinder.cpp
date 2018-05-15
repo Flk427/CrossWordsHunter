@@ -28,6 +28,6 @@ void WordFinder::process()
 		emit progress();
 	}
 
-	DocumentsStorage::Instance().setFilesList(m_documentType, result);
+	DocumentsStorage::Instance().setDocumentsList(m_documentType, result);
 	emit finished();
 }

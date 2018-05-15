@@ -26,11 +26,13 @@ public:
 
 	bool addDocument(CWTypes::DocumentType documentType, const QTextDocument* document);
 	QString getDocumentsPath(const CWTypes::DocumentType documentType);
+	//! Возвращает модель для GUI-представлений.
 	DocumentsListModel* getDocumentsListModel(const CWTypes::DocumentType documentType);
 	WordsOccurenceTableModel* getWordsOccurenceTableModel();
 	QString getNewDocumentsPath(const CWTypes::DocumentType documentType);
 	QStringList getFilesList(const CWTypes::DocumentType documentType);
-	void setFilesList(const CWTypes::DocumentType documentType, const QStringList& filesList);
+	//! Настройка отображаемых файлов. Модель сама уведомит представление об изменении.
+	void setDocumentsList(const CWTypes::DocumentType documentType, const QStringList& filesList);
 
 private:
 	DocumentsStorage();  // конструктор недоступен

@@ -22,7 +22,7 @@ QStringList DocumentsStorage::getFilesList(const CWTypes::DocumentType documentT
 	return dir.entryList(QDir::Files, QDir::Name | QDir::Reversed);
 }
 
-void DocumentsStorage::setFilesList(const CWTypes::DocumentType documentType, const QStringList& filesList)
+void DocumentsStorage::setDocumentsList(const CWTypes::DocumentType documentType, const QStringList& filesList)
 {
 	DocumentsListModel* documentsModel;
 

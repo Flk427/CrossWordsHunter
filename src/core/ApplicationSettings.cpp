@@ -1,4 +1,5 @@
 #include "ApplicationSettings.h"
+#include "KeywordsListModel.h"
 
 ApplicationSettings::ApplicationSettings()
 {
@@ -11,31 +12,52 @@ ApplicationSettings::~ApplicationSettings()
 	delete m_settings;
 }
 
-void ApplicationSettings::readKeywords()
+QStringList ApplicationSettings::readKeywords()
 {
-	m_keywords.clear();
+	QStringList keywords;
+
+	keywords.clear();
 
 	m_settings->beginGroup("keywords");
 	const QStringList childKeys = m_settings->childKeys();
 
 	foreach (const QString &childKey, childKeys)
 	{
-		m_keywords << childKey;
+		keywords << childKey;
 	}
 
 	m_settings->endGroup();
+
+	return keywords;
 }
 
 void ApplicationSettings::addKeyword(const QString& keyword)
 {
-	if (!keyword.isEmpty() && !m_keywords.contains(keyword, Qt::CaseInsensitive))
+	if (!keyword.isEmpty())
 	{
 		m_settings->beginGroup("keywords");
-		m_settings->setValue(keyword, "");
-		m_settings->endGroup();
 
-		m_keywords.push_back(keyword);
-		emit keywordsChanged(m_keywords, m_searchWords);
+		if (!m_settings->contains(keyword))
+		{
+			m_settings->setValue(keyword, "");
+		}
+
+		m_settings->endGroup();
+	}
+}
+
+void ApplicationSettings::removeKeyword(const QString& keyword)
+{
+	if (!keyword.isEmpty())
+	{
+		m_settings->beginGroup("keywords");
+
+		if (m_settings->contains(keyword))
+		{
+			m_settings->remove(keyword);
+		}
+
+		m_settings->endGroup();
 	}
 }
 
@@ -43,17 +65,17 @@ void ApplicationSettings::setSearchWord(const QString& searchWord)
 {
 	if (!searchWord.isEmpty())
 	{
-		if (!m_keywords.contains(searchWord, Qt::CaseInsensitive))
+		if (!KeywordsListModel::Instance().keywords().contains(searchWord, Qt::CaseInsensitive))
 		{
 			m_searchWords.clear();
 			m_searchWords.push_back(searchWord);
-			emit keywordsChanged(m_keywords, m_searchWords);
+			emit searchWordsChanged(m_searchWords);
 		}
 	}
 	else
 	{
 		m_searchWords.clear();
-		emit keywordsChanged(m_keywords, m_searchWords);
+		emit searchWordsChanged(m_searchWords);
 	}
 }
 
@@ -77,11 +99,6 @@ QString ApplicationSettings::getEventsDir()
 QString ApplicationSettings::getJournalsDir()
 {
 	return "Journals";
-}
-
-const QStringList& ApplicationSettings::getKeywords()
-{
-	return m_keywords;
 }
 
 const QStringList& ApplicationSettings::getSearchWords()
