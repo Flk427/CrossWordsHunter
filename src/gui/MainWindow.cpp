@@ -37,9 +37,17 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->journalsViewverWidget, &DocumentsStorageViewverWidget::searchSelectedWord, this, &MainWindow::showSearchWordForm);
 	//connect(ui->wordsOccurenceTableWidget, &WordsOccurenceTableWidget::searchSelectedWord, this, &MainWindow::showSearchWordForm);
 	connect(ui->wordsOccurenceTableWidget, &WordsOccurenceTableWidget::wordSelectionChanged, this, &MainWindow::resetDocuments);
-	connect(ui->action_3, &QAction::triggered, this, &MainWindow::searchReset);
-	connect(ui->action, &QAction::triggered, this, &MainWindow::searchConjunction);
+
+	connect(ui->actionSearchReset, &QAction::triggered, this, &MainWindow::searchReset);
+	//connect(ui->actionShowSearchWordForm, &QAction::triggered, this, &MainWindow::showSearchWordForm); // соединил в дизайнере, т.к. типы разные.
+	connect(ui->actionSearchConjunction, &QAction::triggered, this, &MainWindow::searchConjunction);
 	connect(ui->actionSearchKeywords, &QAction::triggered, this, &MainWindow::searchKeywords);
+
+	connect(ui->actionLoadEvent, &QAction::triggered, this, &MainWindow::loadNewEvent);
+	connect(ui->actionLoadJournal, &QAction::triggered, this, &MainWindow::loadNewJournal);
+
+	connect(ui->toolButtonNewEvent, &QToolButton::clicked, this, &MainWindow::loadNewEvent);
+	connect(ui->toolButtonNewJournal, &QToolButton::clicked, this, &MainWindow::loadNewJournal);
 
 	DocumentsStorage::Instance().updateDocumentsLists();
 

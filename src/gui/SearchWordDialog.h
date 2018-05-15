@@ -20,7 +20,7 @@ class SearchWordDialog : public QDialog
 	Q_OBJECT
 
 public:
-	explicit SearchWordDialog(QWidget *parent = 0);
+	explicit SearchWordDialog(QWidget *parent = nullptr);
 	~SearchWordDialog();
 
 	void startSearchWord(const QString& word);

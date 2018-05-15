@@ -79,7 +79,7 @@
                </spacer>
               </item>
               <item>
-               <widget class="QToolButton" name="toolButton">
+               <widget class="QToolButton" name="toolButtonNewEvent">
                 <property name="text">
                  <string>Загрузить
 сводки</string>
@@ -163,7 +163,7 @@
                </spacer>
               </item>
               <item>
-               <widget class="QToolButton" name="toolButton_2">
+               <widget class="QToolButton" name="toolButtonNewJournal">
                 <property name="text">
                  <string>Загрузить
 реестры</string>
@@ -350,15 +350,17 @@
     <property name="title">
      <string>Поиск</string>
     </property>
-    <addaction name="action_2"/>
-    <addaction name="action"/>
+    <addaction name="actionShowSearchWordForm"/>
+    <addaction name="actionSearchConjunction"/>
     <addaction name="actionSearchKeywords"/>
-    <addaction name="action_3"/>
+    <addaction name="actionSearchReset"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
      <string>Программа</string>
     </property>
+    <addaction name="actionKeywordsEditor"/>
+    <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
    <addaction name="menu_3"/>
@@ -381,17 +383,17 @@
     <string>Выход</string>
    </property>
   </action>
-  <action name="action">
+  <action name="actionSearchConjunction">
    <property name="text">
     <string>Совпадений</string>
    </property>
   </action>
-  <action name="action_2">
+  <action name="actionShowSearchWordForm">
    <property name="text">
     <string>Отдельных слов...</string>
    </property>
   </action>
-  <action name="action_3">
+  <action name="actionSearchReset">
    <property name="text">
     <string>Сброс</string>
    </property>
@@ -399,6 +401,11 @@
   <action name="actionSearchKeywords">
    <property name="text">
     <string>Ключевых слов</string>
+   </property>
+  </action>
+  <action name="actionKeywordsEditor">
+   <property name="text">
+    <string>Ключевые слова...</string>
    </property>
   </action>
  </widget>
@@ -419,71 +426,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>toolButton</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>loadNewEvent()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>184</x>
-     <y>255</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_2</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>loadNewJournal()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>475</x>
-     <y>255</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionLoadEvent</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>loadNewEvent()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionLoadJournal</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>loadNewJournal()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_2</sender>
+   <sender>actionShowSearchWordForm</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>showSearchWordForm()</slot>
@@ -493,8 +436,8 @@
      <y>-1</y>
     </hint>
     <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
+     <x>511</x>
+     <y>383</y>
     </hint>
    </hints>
   </connection>
