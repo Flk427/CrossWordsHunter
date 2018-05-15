@@ -167,7 +167,7 @@ void MainWindow::searchConjunction()
 	connect(&m_pb, &ProgressBarWidget::closed, wordFinder, &WordsOccurence::stop, Qt::ConnectionType::DirectConnection);
 
 	// Удаляем поток, после выполнения операции
-	connect(searchThread, &QThread::finished, searchThread, &SearchWordDialog::deleteLater);
+	connect(searchThread, &QThread::finished, searchThread, &QThread::deleteLater);
 
 	connect(wordFinder, &WordsOccurence::wordsFound, ui->wordsOccurenceTableWidget, &WordsOccurenceTableWidget::setItems, Qt::ConnectionType::DirectConnection);
 
@@ -202,7 +202,7 @@ void MainWindow::searchKeywords()
 	connect(&m_pb, &ProgressBarWidget::closed, wordFinder, &KeywordsFinder::stop, Qt::ConnectionType::DirectConnection);
 
 	// Удаляем поток, после выполнения операции
-	connect(searchThread, &QThread::finished, searchThread, &SearchWordDialog::deleteLater);
+	connect(searchThread, &QThread::finished, searchThread, &QThread::deleteLater);
 
 	//connect(wordFinder, &WordsOccurence::wordsFound, ui->wordsOccurenceTableWidget, &WordsOccurenceTableWidget::setItems, Qt::ConnectionType::DirectConnection);
 
