@@ -65,12 +65,9 @@ void ApplicationSettings::setSearchWord(const QString& searchWord)
 {
 	if (!searchWord.isEmpty())
 	{
-		if (!KeywordsListModel::Instance().keywords().contains(searchWord, Qt::CaseInsensitive))
-		{
-			m_searchWords.clear();
-			m_searchWords.push_back(searchWord);
-			emit searchWordsChanged(m_searchWords);
-		}
+		m_searchWords.clear();
+		m_searchWords.push_back(searchWord);
+		emit searchWordsChanged(m_searchWords);
 	}
 	else
 	{

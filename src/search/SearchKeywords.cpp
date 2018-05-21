@@ -1,5 +1,6 @@
 #include "SearchKeywords.h"
 #include "thread/KeywordsFinder.h"
+#include "core/ApplicationSettings.h"
 
 SearchKeywords::SearchKeywords() : QObject(nullptr)
 {
@@ -13,6 +14,8 @@ SearchKeywords::~SearchKeywords()
 
 void SearchKeywords::start(MainWindow* owner)
 {
+	ApplicationSettings::Instance().setSearchWord("");
+
 	QThread* searchThread = new QThread(this);
 	KeywordsFinder* wordFinder = new KeywordsFinder(nullptr);
 

@@ -27,11 +27,16 @@ private:
 
 	CWTypes::DocumentType m_documentType;
 
+	void search(const QString& str, bool matchCase);
+	void searchWord(const QString& word, bool forward = true);
+
 public slots:
 	void setModel(QAbstractListModel* model);
 	void documentSelected(QModelIndex index);
 	void test();
 	void resetText();
+	void searchNextWord();
+	void searchPrevWord();
 };
 
 #endif // DOCUMENTSSTORAGEVIEWVERWIDGET_H
