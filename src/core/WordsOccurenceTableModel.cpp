@@ -67,7 +67,6 @@ void WordsOccurenceTableModel::setItems(const CWTypes::WordsOccuring* wordsOccur
 	layoutChanged();
 }
 
-
 int WordsOccurenceTableModel::rowCount(const QModelIndex&) const
 {
 	return m_wordsOccuring.count();
@@ -111,7 +110,6 @@ QVariant WordsOccurenceTableModel::data(const QModelIndex& index, int role) cons
 	return QVariant();
 }
 
-
 bool WordsOccurenceTableModel::insertRows(int row, int count, const QModelIndex& parent)
 {
 	beginInsertRows(parent, 0, count);
@@ -125,7 +123,6 @@ bool WordsOccurenceTableModel::removeRows(int row, int count, const QModelIndex&
 	endRemoveRows();
 	return true;
 }
-
 
 QVariant WordsOccurenceTableModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
