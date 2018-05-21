@@ -33,7 +33,9 @@ WordsOccurenceTableModel::WordInfo WordsOccurenceTableModel::getWordInfo(int row
 
 void WordsOccurenceTableModel::setItems(const CWTypes::WordsOccuring* wordsOccuring)
 {
-	removeRows(0, 0, QModelIndex());
+	beginResetModel();
+	m_wordsOccuring.clear();
+	endResetModel();
 
 	foreach (const QString& word, wordsOccuring->keys())
 	{
@@ -120,7 +122,6 @@ bool WordsOccurenceTableModel::insertRows(int row, int count, const QModelIndex&
 bool WordsOccurenceTableModel::removeRows(int row, int count, const QModelIndex& parent)
 {
 	beginRemoveRows(parent, 0, m_wordsOccuring.count());
-	m_wordsOccuring.clear();
 	endRemoveRows();
 	return true;
 }
