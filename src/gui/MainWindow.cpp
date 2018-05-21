@@ -37,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->journalsViewverWidget, &DocumentsStorageViewverWidget::searchSelectedWord, this, &MainWindow::searchWord);
 	//connect(ui->wordsOccurenceTableWidget, &WordsOccurenceTableWidget::searchSelectedWord, this, &MainWindow::showSearchWordForm);
 	connect(ui->wordsOccurenceTableWidget, &WordsOccurenceTableWidget::wordSelectionChanged, this, &MainWindow::resetDocuments);
+	connect(ui->wordsOccurenceTableWidget, &WordsOccurenceTableWidget::wordSelectionChanged, ui->eventsViewverWidget, &DocumentsStorageViewverWidget::selectFirstDocument);
+	connect(ui->wordsOccurenceTableWidget, &WordsOccurenceTableWidget::wordSelectionChanged, ui->journalsViewverWidget, &DocumentsStorageViewverWidget::selectFirstDocument);
 
 	connect(ui->actionSearchReset, &QAction::triggered, this, &MainWindow::searchReset);
 	//connect(ui->actionShowSearchWordForm, &QAction::triggered, this, &MainWindow::searchWord); // соединил в дизайнере, т.к. типы разные.
@@ -153,6 +155,7 @@ void MainWindow::on_actionQuit_triggered()
 void MainWindow::searchConjunction()
 {
 	ui->tabWidget->setCurrentIndex(1);
+	resetDocuments();
 
 	SearchConjunction* searchConjunction = new SearchConjunction();
 	searchConjunction->start(this);
@@ -162,6 +165,7 @@ void MainWindow::searchKeywords()
 {
 	ui->tabWidget->setCurrentIndex(1);
 	ui->wordsOccurenceTableWidget->hide();
+	resetDocuments();
 
 	SearchKeywords* searchKeywords = new SearchKeywords();
 	searchKeywords->start(this);

@@ -15,7 +15,7 @@ DocumentsStorageViewverWidget::DocumentsStorageViewverWidget(QWidget *parent) :
 
 	m_documentType = CWTypes::Event;
 	connect(ui->textEdit, &DocumentEditorWidget::searchSelectedWord, this, &DocumentsStorageViewverWidget::searchSelectedWord);
-	connect(ui->listView, &QListView::doubleClicked, this, &DocumentsStorageViewverWidget::documentSelected);
+	connect(ui->listView, &QListView::doubleClicked, this, &DocumentsStorageViewverWidget::selectDocument);
 
 	connect(ui->toolButtonNextWord, &QToolButton::clicked, this, &DocumentsStorageViewverWidget::searchNextWord);
 	connect(ui->toolButtonPrevWord, &QToolButton::clicked, this, &DocumentsStorageViewverWidget::searchPrevWord);
@@ -38,7 +38,15 @@ void DocumentsStorageViewverWidget::setModel(QAbstractListModel* model)
 	ui->listView->setModel(model);
 }
 
-void DocumentsStorageViewverWidget::documentSelected(QModelIndex index)
+void DocumentsStorageViewverWidget::selectFirstDocument()
+{
+	if (ui->listView->model()->rowCount() != 0)
+	{
+		selectDocument(ui->listView->model()->index(0, 0));
+	}
+}
+
+void DocumentsStorageViewverWidget::selectDocument(QModelIndex index)
 {
 	QString documentName = ui->listView->model()->data(index, Qt::DisplayRole).toString();
 	QString fileName = DocumentsStorage::Instance().getDocumentsPath(m_documentType) + QDir::separator() + documentName;
@@ -96,6 +104,7 @@ void DocumentsStorageViewverWidget::searchPrevWord()
 {
 	if (!ApplicationSettings::Instance().getSearchWords().empty())
 	{
+		ui->textEdit->setFocus();
 		searchWord(ApplicationSettings::Instance().getSearchWords().first(), false);
 		return;
 //		search(ApplicationSettings::Instance().getSearchWords().first(), false);

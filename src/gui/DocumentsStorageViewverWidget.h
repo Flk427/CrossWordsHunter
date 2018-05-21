@@ -32,7 +32,8 @@ private:
 
 public slots:
 	void setModel(QAbstractListModel* model);
-	void documentSelected(QModelIndex index);
+	void selectFirstDocument();
+	void selectDocument(QModelIndex index);
 	void test();
 	void resetText();
 	void searchNextWord();
