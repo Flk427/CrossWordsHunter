@@ -157,6 +157,9 @@ void MainWindow::searchConjunction()
 	ui->tabWidget->setCurrentIndex(1);
 	resetDocuments();
 
+	DocumentsStorage::Instance().setDocumentsList(CWTypes::DocumentType::Event, QStringList());
+	DocumentsStorage::Instance().setDocumentsList(CWTypes::DocumentType::Journal, QStringList());
+
 	SearchConjunction* searchConjunction = new SearchConjunction();
 	searchConjunction->start(this);
 }
