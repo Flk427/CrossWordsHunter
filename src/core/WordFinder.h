@@ -16,11 +16,13 @@ signals:
 
 public slots:
 	void process();
+	void stop();
 
 private:
 	CWTypes::DocumentType m_documentType;
 	QString m_path;
 	QString m_word;
+	bool m_stop;
 };
 
 #endif // WORDFINDER_H

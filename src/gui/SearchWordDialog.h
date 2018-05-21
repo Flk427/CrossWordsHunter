@@ -12,8 +12,6 @@ class SearchWordDialog;
 
 /*!
 \brief Поиск слова.
-
-Вызываемые потоки сохраняют результаты сразу в DocumentsStorage.
 */
 class SearchWordDialog : public QDialog
 {
@@ -21,34 +19,17 @@ class SearchWordDialog : public QDialog
 
 public:
 	explicit SearchWordDialog(QWidget *parent = nullptr);
-	~SearchWordDialog();
+	~SearchWordDialog() override;
 
-	void startSearchWord(const QString& word);
-
-private slots:
-	void startSearch();
-	void journalsSearchThreadStart();
-	void searchFinished();
+	QString getWord() const;
 
 private:
 	Ui::SearchWordDialog *ui;
-	QThread* m_eventsSearchThread;
-	QThread* m_journalsSearchThread;
-	WordFinder* m_eventsWordFinder;
-	WordFinder* m_journalsWordFinder;
-	bool m_canClose;
 
 	virtual int exec() override;
 
-	void createSearchThread(const CWTypes::DocumentType documentType, QThread*& searchThread, WordFinder*& wordFinder, const QString& path, const QString& word, bool nextThread);
-
-	// QDialog interface
 public slots:
 	virtual int exec(const QStringList& keywords);
-
-	// QWidget interface
-protected:
-	virtual void closeEvent(QCloseEvent* event) override;
 };
 
 #endif // SEARCHWORDDIALOG_H

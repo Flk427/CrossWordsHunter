@@ -51,7 +51,10 @@ SOURCES += main.cpp \
     core/WordsOccurenceTableModel.cpp \
     gui/WordsOccurenceTableWidget.cpp \
     core/KeywordsFinder.cpp \
-    core/KeywordsListModel.cpp
+    core/KeywordsListModel.cpp \
+    search/SearchConjunction.cpp \
+    search/SearchKeywords.cpp \
+    search/SearchWord.cpp
 
 HEADERS += \
     helpers/WordsHelpers.h \
@@ -75,7 +78,10 @@ HEADERS += \
     core/WordsOccurenceTableModel.h \
     gui/WordsOccurenceTableWidget.h \
     core/KeywordsFinder.h \
-    core/KeywordsListModel.h
+    core/KeywordsListModel.h \
+    search/SearchConjunction.h \
+    search/SearchKeywords.h \
+    search/SearchWord.h
 
 FORMS += \
     gui/MainWindow.ui \

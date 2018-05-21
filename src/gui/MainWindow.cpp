@@ -7,6 +7,9 @@
 #include "core/WordsOccurence.h"
 #include "core/KeywordsFinder.h"
 #include "core/KeywordsListModel.h"
+#include "search/SearchConjunction.h"
+#include "search/SearchKeywords.h"
+#include "search/SearchWord.h"
 
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
@@ -33,8 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->toolButton_4, &QToolButton::toggled, ui->journalsViewverWidget, &DocumentsStorageViewverWidget::setVisible);
 
 	connect(&DocumentsStorage::Instance(), &DocumentsStorage::storageUpdatedNotice, this, &MainWindow::updateStatus);
-	connect(ui->eventsViewverWidget, &DocumentsStorageViewverWidget::searchSelectedWord, this, &MainWindow::showSearchWordForm);
-	connect(ui->journalsViewverWidget, &DocumentsStorageViewverWidget::searchSelectedWord, this, &MainWindow::showSearchWordForm);
+	connect(ui->eventsViewverWidget, &DocumentsStorageViewverWidget::searchSelectedWord, this, &MainWindow::searchWord);
+	connect(ui->journalsViewverWidget, &DocumentsStorageViewverWidget::searchSelectedWord, this, &MainWindow::searchWord);
 	//connect(ui->wordsOccurenceTableWidget, &WordsOccurenceTableWidget::searchSelectedWord, this, &MainWindow::showSearchWordForm);
 	connect(ui->wordsOccurenceTableWidget, &WordsOccurenceTableWidget::wordSelectionChanged, this, &MainWindow::resetDocuments);
 
@@ -97,7 +100,7 @@ void MainWindow::setJournalsVisible(bool visible)
 	ui->journalsViewverWidget->setVisible(visible);
 }
 
-void MainWindow::showSearchWordForm(const QString& word)
+void MainWindow::searchWord(const QString& word)
 {
 	if (word.isEmpty())
 	{
@@ -106,13 +109,17 @@ void MainWindow::showSearchWordForm(const QString& word)
 			ui->wordsOccurenceTableWidget->hide();
 			resetDocuments();
 			ui->tabWidget->setCurrentIndex(1);
+
+			SearchWord* searchWord = new SearchWord();
+			searchWord->start(this, m_searchWordDialog->getWord());
 		}
 	}
 	else
 	{
 		ui->wordsOccurenceTableWidget->hide();
 		resetDocuments();
-		m_searchWordDialog->startSearchWord(word);
+		SearchWord* searchWord = new SearchWord();
+		searchWord->start(this, word);
 	}
 }
 
@@ -130,6 +137,16 @@ void MainWindow::resetDocuments()
 	ui->journalsViewverWidget->resetText();
 }
 
+void MainWindow::setupOccurenceTable(const CWTypes::WordsOccuring* wordsOccuring)
+{
+	 ui->wordsOccurenceTableWidget->setItems(wordsOccuring);
+}
+
+void MainWindow::showOccurenceTable()
+{
+	ui->wordsOccurenceTableWidget->show();
+}
+
 void MainWindow::on_actionQuit_triggered()
 {
 	// Эта штука автоматически связывается через QMetaObject::connectSlotsByName(MainWindow);
@@ -138,80 +155,19 @@ void MainWindow::on_actionQuit_triggered()
 
 void MainWindow::searchConjunction()
 {
-//	WordsOccurence* wo = new WordsOccurence(DocumentsStorage::Instance().getDocumentsPath(CWTypes::DocumentType::Event),
-//											DocumentsStorage::Instance().getDocumentsPath(CWTypes::DocumentType::Journal),
-//											nullptr);
-//	wo->process();
-//	wo->deleteLater();
-
-	QThread* searchThread = new QThread(this);
-	WordsOccurence* wordFinder = new WordsOccurence(DocumentsStorage::Instance().getDocumentsPath(CWTypes::DocumentType::Event),
-													DocumentsStorage::Instance().getDocumentsPath(CWTypes::DocumentType::Journal),
-													nullptr);
-
 	ui->tabWidget->setCurrentIndex(1);
 
-	wordFinder->moveToThread(searchThread);
-
-	connect(wordFinder, &WordsOccurence::progress, &m_pb, &ProgressBarWidget::setState);
-
-	// Соединяем сигнал started потока, со слотом process "рабочего" класса, т.е. начинается выполнение нужной работы.
-	connect(searchThread, &QThread::started, wordFinder, &WordsOccurence::process);
-
-	// По завершению выходим из потока, и удаляем рабочий класс
-	connect(wordFinder, &WordsOccurence::finished, searchThread, &QThread::quit);
-	connect(wordFinder, &WordsOccurence::finished, wordFinder, &WordsOccurence::deleteLater);
-	connect(wordFinder, &WordsOccurence::finished, &m_pb, &QWidget::hide);
-	connect(wordFinder, &WordsOccurence::finished, ui->wordsOccurenceTableWidget, &QWidget::show);
-
-	connect(&m_pb, &ProgressBarWidget::closed, wordFinder, &WordsOccurence::stop, Qt::ConnectionType::DirectConnection);
-
-	// Удаляем поток, после выполнения операции
-	connect(searchThread, &QThread::finished, searchThread, &QThread::deleteLater);
-
-	connect(wordFinder, &WordsOccurence::wordsFound, ui->wordsOccurenceTableWidget, &WordsOccurenceTableWidget::setItems, Qt::ConnectionType::DirectConnection);
-
-	m_pb.setWindowTitle("Идёт поиск...");
-	m_pb.setParent(this);
-	m_pb.setWindowFlags(Qt::Dialog);
-	m_pb.setWindowModality(Qt::WindowModality::WindowModal);
-	m_pb.show();
-	searchThread->start();
+	SearchConjunction* searchConjunction = new SearchConjunction();
+	searchConjunction->start(this);
 }
 
 void MainWindow::searchKeywords()
 {
-	QThread* searchThread = new QThread(this);
-	KeywordsFinder* wordFinder = new KeywordsFinder(nullptr);
-
 	ui->tabWidget->setCurrentIndex(1);
 	ui->wordsOccurenceTableWidget->hide();
 
-	wordFinder->moveToThread(searchThread);
-
-	connect(wordFinder, &KeywordsFinder::reportState, &m_pb, &ProgressBarWidget::setState);
-
-	// Соединяем сигнал started потока, со слотом process "рабочего" класса, т.е. начинается выполнение нужной работы.
-	connect(searchThread, &QThread::started, wordFinder, &KeywordsFinder::process);
-
-	// По завершению выходим из потока, и удаляем рабочий класс
-	connect(wordFinder, &KeywordsFinder::finished, searchThread, &QThread::quit);
-	connect(wordFinder, &KeywordsFinder::finished, wordFinder, &WordsOccurence::deleteLater);
-	connect(wordFinder, &KeywordsFinder::finished, &m_pb, &QWidget::hide);
-
-	connect(&m_pb, &ProgressBarWidget::closed, wordFinder, &KeywordsFinder::stop, Qt::ConnectionType::DirectConnection);
-
-	// Удаляем поток, после выполнения операции
-	connect(searchThread, &QThread::finished, searchThread, &QThread::deleteLater);
-
-	//connect(wordFinder, &WordsOccurence::wordsFound, ui->wordsOccurenceTableWidget, &WordsOccurenceTableWidget::setItems, Qt::ConnectionType::DirectConnection);
-
-	m_pb.setWindowTitle("Идёт поиск...");
-	m_pb.setParent(this);
-	m_pb.setWindowFlags(Qt::Dialog);
-	m_pb.setWindowModality(Qt::WindowModality::WindowModal);
-	m_pb.show();
-	searchThread->start();
+	SearchKeywords* searchKeywords = new SearchKeywords();
+	searchKeywords->start(this);
 }
 
 //void MainWindow::on_actionLoadEvent_triggered()

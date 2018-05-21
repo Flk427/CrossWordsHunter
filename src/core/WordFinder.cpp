@@ -8,7 +8,8 @@ WordFinder::WordFinder(const CWTypes::DocumentType documentType, const QString& 
 	QObject(parent),
 	m_documentType(documentType),
 	m_path(path),
-	m_word(word)
+	m_word(word),
+	m_stop(false)
 {
 }
 
@@ -20,6 +21,12 @@ void WordFinder::process()
 
 	foreach (const QString& fileName, files)
 	{
+		if (m_stop)
+		{
+			emit progress();
+			return;
+		}
+
 		if (FilesHelpers::isFileContainWord(m_path + QDir::separator() + fileName, m_word))
 		{
 			result << fileName;
@@ -30,4 +37,9 @@ void WordFinder::process()
 
 	DocumentsStorage::Instance().setDocumentsList(m_documentType, result);
 	emit finished();
+}
+
+void WordFinder::stop()
+{
+	m_stop = true;
 }

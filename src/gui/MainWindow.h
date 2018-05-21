@@ -24,9 +24,11 @@ public slots:
 	void updateStatus(QString text);
 	void setEventsVisible(bool visible);
 	void setJournalsVisible(bool visible);
-	void showSearchWordForm(const QString& word="");
+	void searchWord(const QString& word="");
 	void searchReset();
 	void resetDocuments();
+	void setupOccurenceTable(const CWTypes::WordsOccuring* wordsOccuring);
+	void showOccurenceTable();
 
 private slots:
 	void on_actionQuit_triggered();
@@ -37,9 +39,7 @@ private slots:
 
 private:
 	Ui::MainWindow *ui;
-
 	SearchWordDialog* m_searchWordDialog;
-
 	ProgressBarWidget m_pb;
 };
 
