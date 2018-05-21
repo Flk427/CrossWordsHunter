@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QStringList>
 #include <QThread>
-#include "core/WordFinder.h"
+#include "search/thread/WordFinder.h"
 
 namespace Ui {
 class SearchWordDialog;

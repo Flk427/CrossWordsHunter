@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QTextDocument>
+#include "core/types.h"
 #include "gui/SearchWordDialog.h"
 #include "gui/ProgressBarWidget.h"
 

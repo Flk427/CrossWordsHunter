@@ -1,5 +1,5 @@
 #include "SearchKeywords.h"
-#include "core/KeywordsFinder.h"
+#include "thread/KeywordsFinder.h"
 
 SearchKeywords::SearchKeywords() : QObject(nullptr)
 {

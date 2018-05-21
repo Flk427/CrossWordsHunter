@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "gui/MainWindow.h"
+#include "thread/WordFinder.h"
 
 /*!
 \brief The SearchWord class

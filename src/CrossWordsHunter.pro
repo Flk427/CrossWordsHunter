@@ -45,12 +45,12 @@ SOURCES += main.cpp \
     core/DocumentTextHighlighter.cpp \
     gui/DocumentEditorWidget.cpp \
     gui/SearchWordDialog.cpp \
-    core/WordFinder.cpp \
-    core/WordsOccurence.cpp \
+    search/thread/WordFinder.cpp \
+    search/thread/WordsOccurence.cpp \
     gui/ProgressBarWidget.cpp \
     core/WordsOccurenceTableModel.cpp \
     gui/WordsOccurenceTableWidget.cpp \
-    core/KeywordsFinder.cpp \
+    search/thread/KeywordsFinder.cpp \
     core/KeywordsListModel.cpp \
     search/SearchConjunction.cpp \
     search/SearchKeywords.cpp \
@@ -71,13 +71,13 @@ HEADERS += \
     core/DocumentTextHighlighter.h \
     gui/DocumentEditorWidget.h \
     gui/SearchWordDialog.h \
-    core/WordFinder.h \
+    search/thread/WordFinder.h \
     core/types.h \
-    core/WordsOccurence.h \
+    search/thread/WordsOccurence.h \
     gui/ProgressBarWidget.h \
     core/WordsOccurenceTableModel.h \
     gui/WordsOccurenceTableWidget.h \
-    core/KeywordsFinder.h \
+    search/thread/KeywordsFinder.h \
     core/KeywordsListModel.h \
     search/SearchConjunction.h \
     search/SearchKeywords.h \

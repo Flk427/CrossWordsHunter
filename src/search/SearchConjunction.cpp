@@ -1,6 +1,6 @@
 #include "SearchConjunction.h"
 #include <QThread>
-#include "core/WordsOccurence.h"
+#include "thread/WordsOccurence.h"
 #include "core/DocumentsStorage.h"
 #include "gui/ProgressBarWidget.h"
 
