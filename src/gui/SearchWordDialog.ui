@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>323</width>
-    <height>239</height>
+    <height>124</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -74,19 +74,8 @@
      </layout>
     </widget>
    </item>
-   <item>
-    <widget class="ProgressBarWidget" name="progressWidget" native="true"/>
-   </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>ProgressBarWidget</class>
-   <extends>QWidget</extends>
-   <header>ProgressBarWidget.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

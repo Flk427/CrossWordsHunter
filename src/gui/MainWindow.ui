@@ -429,7 +429,7 @@
    <sender>actionShowSearchWordForm</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
-   <slot>showSearchWordForm()</slot>
+   <slot>searchWord()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -447,6 +447,6 @@
   <slot>loadNewJournal()</slot>
   <slot>setJournalsVisible(bool)</slot>
   <slot>setEventsVisible(bool)</slot>
-  <slot>showSearchWordForm()</slot>
+  <slot>searchWord()</slot>
  </slots>
 </ui>

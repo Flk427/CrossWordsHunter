@@ -39,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->wordsOccurenceTableWidget, &WordsOccurenceTableWidget::wordSelectionChanged, this, &MainWindow::resetDocuments);
 
 	connect(ui->actionSearchReset, &QAction::triggered, this, &MainWindow::searchReset);
-	//connect(ui->actionShowSearchWordForm, &QAction::triggered, this, &MainWindow::showSearchWordForm); // соединил в дизайнере, т.к. типы разные.
+	//connect(ui->actionShowSearchWordForm, &QAction::triggered, this, &MainWindow::searchWord); // соединил в дизайнере, т.к. типы разные.
 	connect(ui->actionSearchConjunction, &QAction::triggered, this, &MainWindow::searchConjunction);
 	connect(ui->actionSearchKeywords, &QAction::triggered, this, &MainWindow::searchKeywords);
 

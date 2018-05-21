@@ -12,8 +12,6 @@ SearchWordDialog::SearchWordDialog(QWidget *parent) :
 
 	connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &SearchWordDialog::accept);
 	connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
-
-	ui->progressWidget->setVisible(false);
 }
 
 SearchWordDialog::~SearchWordDialog()
@@ -37,8 +35,6 @@ int SearchWordDialog::exec(const QStringList& keywords)
 	setWindowTitle("Поиск фрагмента текста");
 
 	ui->frame->setVisible(true);
-	ui->progressWidget->setVisible(false);
-
 	ui->comboBox->clear();
 	ui->comboBox->insertItems(0, keywords);
 	ui->comboBox->setCurrentIndex(-1);
