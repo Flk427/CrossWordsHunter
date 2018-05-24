@@ -30,7 +30,7 @@
    <item>
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>Поиск...</string>
+      <string>Выполнение:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
