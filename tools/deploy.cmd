@@ -11,3 +11,4 @@ cd ../bin/CrossWordsHunter
 %qt%\bin\windeployqt.exe CrossWordsHunter.exe
 xcopy /E /Y ..\..\examples\Storage .\Storage\
 xcopy /E /Y ..\..\tools\vcredist_x86_2012.exe .\
+xcopy /E /Y ..\..\tools\oofileimport.vbs .\

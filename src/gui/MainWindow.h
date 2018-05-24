@@ -37,11 +37,16 @@ private slots:
 	void searchKeywords();
 
 //	void on_actionLoadEvent_triggered();
+	void on_actiontest_qax_triggered();
+	void on_actiontest_mime_triggered();
+	void on_actiontest_Excel_1_triggered();
+	void on_actiontest_Libre_Office_triggered();
+	void on_actionImportEvents_triggered();
+	void on_actionImportJournals_triggered();
 
 private:
 	Ui::MainWindow *ui;
 	SearchWordDialog* m_searchWordDialog;
-	ProgressBarWidget m_pb;
 };
 
 #endif // MAINWINDOW_H

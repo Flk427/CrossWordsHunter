@@ -7,6 +7,8 @@
 #include "search/SearchConjunction.h"
 #include "search/SearchKeywords.h"
 #include "search/SearchWord.h"
+#include "document_import/ImportOpenOfficeDocuments.h"
+#include "tests.h"
 
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
@@ -23,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->wordsOccurenceTableWidget->hide();
 	showMaximized();
 
-	ui->eventsViewverWidget->setDocumentType(CWTypes::Event);
+	ui->eventsViewverWidget->setDocumentType(CWTypes::Event); // setDataStorage
 	ui->journalsViewverWidget->setDocumentType(CWTypes::Journal);
 
 	ui->eventsViewverWidget->setModel(DocumentsStorage::Instance().getDocumentsListModel(CWTypes::Event));
@@ -125,7 +127,6 @@ void MainWindow::searchWord(const QString& word)
 void MainWindow::searchReset()
 {
 	ui->wordsOccurenceTableWidget->hide();
-//	resetDocuments();
 	DocumentsStorage::Instance().readDocumentsLists();
 	ApplicationSettings::Instance().setSearchWord("");
 }
@@ -138,7 +139,7 @@ void MainWindow::resetDocuments()
 
 void MainWindow::setupOccurenceTable(const CWTypes::WordsOccuring* wordsOccuring)
 {
-	 ui->wordsOccurenceTableWidget->setItems(wordsOccuring);
+	ui->wordsOccurenceTableWidget->setItems(wordsOccuring);
 }
 
 void MainWindow::showOccurenceTable()
@@ -178,3 +179,43 @@ void MainWindow::searchKeywords()
 //{
 //	loadNewEvent();
 //}
+
+void MainWindow::on_actiontest_qax_triggered()
+{
+	t::testQAX(this);
+}
+
+void MainWindow::on_actiontest_mime_triggered()
+{
+	t::testMime();
+}
+
+void MainWindow::on_actiontest_Excel_1_triggered()
+{
+	t::testExcel1();
+}
+
+void MainWindow::on_actiontest_Libre_Office_triggered()
+{
+	t::testLibreOffice(this);
+}
+
+void MainWindow::on_actionImportEvents_triggered()
+{
+	ui->tabWidget->setCurrentIndex(1);
+	ui->wordsOccurenceTableWidget->hide();
+	resetDocuments();
+
+	ImportOpenOfficeDocuments* importOpenOfficeDocuments = new ImportOpenOfficeDocuments();
+	importOpenOfficeDocuments->start(this, CWTypes::DocumentType::Event);
+}
+
+void MainWindow::on_actionImportJournals_triggered()
+{
+	ui->tabWidget->setCurrentIndex(1);
+	ui->wordsOccurenceTableWidget->hide();
+	resetDocuments();
+
+	ImportOpenOfficeDocuments* importOpenOfficeDocuments = new ImportOpenOfficeDocuments();
+	importOpenOfficeDocuments->start(this, CWTypes::DocumentType::Journal);
+}

@@ -2,10 +2,13 @@ TARGET = CrossWordsHunter
 
 #QT -= gui
 QT += widgets
+QT += axcontainer
 
 CONFIG += c++11
 #CONFIG += console
 CONFIG -= app_bundle
+
+#LIBS += -lqaxcontainer
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -54,7 +57,10 @@ SOURCES += main.cpp \
     core/KeywordsListModel.cpp \
     search/SearchConjunction.cpp \
     search/SearchKeywords.cpp \
-    search/SearchWord.cpp
+    search/SearchWord.cpp \
+    tests.cpp \
+    document_import/ImportOpenOfficeDocuments.cpp \
+    document_import/thread/ImportOpenOfficeFiles.cpp
 
 HEADERS += \
     helpers/WordsHelpers.h \
@@ -81,7 +87,10 @@ HEADERS += \
     core/KeywordsListModel.h \
     search/SearchConjunction.h \
     search/SearchKeywords.h \
-    search/SearchWord.h
+    search/SearchWord.h \
+    tests.h \
+    document_import/ImportOpenOfficeDocuments.h \
+    document_import/thread/ImportOpenOfficeFiles.h
 
 FORMS += \
     gui/MainWindow.ui \

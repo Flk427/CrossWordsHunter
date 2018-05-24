@@ -344,7 +344,9 @@
      <string>Загрузить</string>
     </property>
     <addaction name="actionLoadEvent"/>
+    <addaction name="actionImportEvents"/>
     <addaction name="actionLoadJournal"/>
+    <addaction name="actionImportJournals"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -363,9 +365,19 @@
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
+   <widget class="QMenu" name="menutests">
+    <property name="title">
+     <string>tests</string>
+    </property>
+    <addaction name="actiontest_qax"/>
+    <addaction name="actiontest_Excel_1"/>
+    <addaction name="actiontest_mime"/>
+    <addaction name="actiontest_Libre_Office"/>
+   </widget>
    <addaction name="menu_3"/>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
+   <addaction name="menutests"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionLoadEvent">
@@ -406,6 +418,36 @@
   <action name="actionKeywordsEditor">
    <property name="text">
     <string>Ключевые слова...</string>
+   </property>
+  </action>
+  <action name="actiontest_qax">
+   <property name="text">
+    <string>test qax</string>
+   </property>
+  </action>
+  <action name="actiontest_mime">
+   <property name="text">
+    <string>test mime</string>
+   </property>
+  </action>
+  <action name="actiontest_Excel_1">
+   <property name="text">
+    <string>test Excel 1</string>
+   </property>
+  </action>
+  <action name="actiontest_Libre_Office">
+   <property name="text">
+    <string>test Libre Office</string>
+   </property>
+  </action>
+  <action name="actionImportEvents">
+   <property name="text">
+    <string>Сводки...</string>
+   </property>
+  </action>
+  <action name="actionImportJournals">
+   <property name="text">
+    <string>Реестры...</string>
    </property>
   </action>
  </widget>
