@@ -6,6 +6,7 @@ ProgressBarWidget::ProgressBarWidget(QWidget *parent) :
 	ui(new Ui::ProgressBarWidget)
 {
 	ui->setupUi(this);
+	setValue(0);
 }
 
 ProgressBarWidget::~ProgressBarWidget()

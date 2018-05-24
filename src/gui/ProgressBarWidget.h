@@ -12,8 +12,8 @@ class ProgressBarWidget : public QWidget
 	Q_OBJECT
 
 public:
-	explicit ProgressBarWidget(QWidget *parent = 0);
-	~ProgressBarWidget();
+	explicit ProgressBarWidget(QWidget *parent = nullptr);
+	virtual ~ProgressBarWidget() override;
 
 	int value();
 
