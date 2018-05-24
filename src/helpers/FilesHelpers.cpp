@@ -1,4 +1,5 @@
 #include "FilesHelpers.h"
+#include <QApplication>
 #include <QFileDialog>
 #include <QTextDocumentWriter>
 #include <QDate>
@@ -7,8 +8,13 @@
 #include <QTextCodec>
 #include <QTextCursor>
 #include <QTextDocument>
+#include <QDebug>
+#include <QDir>
+#include <QProcess>
+#include <QMimeDatabase>
 #include "datasources/textsources/TextFileSource.h"
 #include "helpers/WordsHelpers.h"
+#include "core/DocumentsStorage.h"
 
 namespace FilesHelpers {
 
@@ -75,7 +81,7 @@ bool checkFileName(const QString& fileName)
 
 QString generateFileName()
 {
-	return QDate::currentDate().toString("yyyyMMdd") + QTime::currentTime().toString("hhmmss") + ".html";
+	return QDate::currentDate().toString("yyyyMMdd") + QTime::currentTime().toString("hhmmsszzz") + ".html";
 }
 
 bool readDocument(const QString& fileName, QTextDocument& document)
@@ -117,10 +123,10 @@ bool isFileContainWord(const QString& fileName, const QString& word)
 
 	if (readDocument(fileName, document))
 	{
-//		if (document.toPlainText().contains(word, Qt::CaseInsensitive))
-//		{
-//			return true;
-//		}
+		//		if (document.toPlainText().contains(word, Qt::CaseInsensitive))
+		//		{
+		//			return true;
+		//		}
 
 		QTextCursor cursor = document.find(word, 0, 0);
 
@@ -185,6 +191,96 @@ bool isFileContainWords(const QString& fileName, const QStringList& words)
 	}
 
 	return false;
+}
+
+QStringList selectFiles(QWidget* parent)
+{
+	//QFileDialog::getOpenFileNames(this, "open...", QApplication::applicationDirPath(), "OpenOffice documents (*.ods *.odt);;Microsoft Office documents (*.doc *.docx *.xls *.xlsx)");
+
+	QStringList filters;
+	filters << "Microsoft Office documents (*.doc *.docx *.xls *.xlsx)"
+			<< "OpenOffice documents (*.ods *.odt)";
+
+	QFileDialog dialog(parent);
+	dialog.setDirectory(QApplication::applicationDirPath());
+	dialog.setFileMode(QFileDialog::ExistingFiles);
+	dialog.setNameFilters(filters);
+	dialog.setViewMode(QFileDialog::Detail);
+
+	QStringList fileNames;
+
+	if (dialog.exec())
+	{
+		fileNames = dialog.selectedFiles();
+		return fileNames;
+	}
+
+	return QStringList();
+}
+
+bool importOpenOfficeFile(CWTypes::DocumentType documentType, const QString& fileName)
+{
+	int result;
+
+	QDir exportDir(DocumentsStorage::Instance().getDocumentsPath(documentType));
+
+	//check MIME
+	QString fileFormatName;
+
+	CWTypes::DocumentFormat fileFormat = getFileFormat(fileName);
+
+	if (fileFormat == CWTypes::DocumentFormat::TextDocument)
+	{
+		fileFormatName = "text";
+	}
+	else if (fileFormat == CWTypes::DocumentFormat::SpeadSheet)
+	{
+		fileFormatName = "calc";
+	}
+
+	if (fileFormat != CWTypes::DocumentFormat::Unknown)
+	{
+		QString args;
+		args += "oofileimport.vbs ";
+		args += fileFormatName + " ";
+		args += "\"" + fileName + "\" ";
+		args += "\"" + exportDir.absolutePath()
+				+ QDir::separator()
+				+ generateFileName() + "\"";
+
+		QProcess process;
+
+		result = process.execute("wscript.exe " + args);
+		process.waitForFinished(30000);
+		return result == 0 ? true : false;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+CWTypes::DocumentFormat getFileFormat(const QString& fileName)
+{
+	QString mime = QMimeDatabase().mimeTypeForFile(fileName).name();
+
+	if (mime == "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+		|| mime == "application/rtf"
+		|| mime == "application/msword"
+		|| mime == "application/vnd.oasis.opendocument.text")
+	{
+		return CWTypes::DocumentFormat::TextDocument;
+	}
+	else if (mime == "application/vnd.oasis.opendocument.spreadsheet"
+			 || mime == "application/vnd.ms-excel"
+			 || mime == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+	{
+		return CWTypes::DocumentFormat::SpeadSheet;
+	}
+	else
+	{
+		return CWTypes::DocumentFormat::Unknown;
+	}
 }
 
 } // end of namespace FilesHelpers

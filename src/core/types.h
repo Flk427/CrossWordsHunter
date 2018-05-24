@@ -9,6 +9,7 @@ namespace CWTypes
 {
 
 enum DocumentType {Event, Journal};
+enum DocumentFormat {Unknown, TextDocument, SpeadSheet};
 
 typedef struct
 {
