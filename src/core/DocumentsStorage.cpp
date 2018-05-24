@@ -156,3 +156,23 @@ bool DocumentsStorage::addDocument(CWTypes::DocumentType documentType, const QTe
 		return false;
 	}
 }
+
+QString DocumentRepository::path() const
+{
+	return m_path;
+}
+
+void DocumentRepository::setPath(const QString& path)
+{
+	m_path = path;
+}
+
+QAbstractItemModel* DocumentRepository::model() const
+{
+	return m_model;
+}
+
+void DocumentRepository::setModel(QAbstractItemModel* model)
+{
+	m_model = model;
+}

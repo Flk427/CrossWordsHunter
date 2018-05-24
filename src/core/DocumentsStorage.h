@@ -8,14 +8,23 @@
 #include "core/types.h"
 #include "core/WordsOccurenceTableModel.h"
 
-typedef struct
+class DocumentRepository : public QObject
 {
-	QString word;
-	int eventsWordCount;
-	int journalsWordCount;
-	QStringList eventsList;
-	QStringList journalsList;
-} WordSearchResult;
+	Q_OBJECT
+public:
+	DocumentRepository();
+	virtual ~DocumentRepository();
+
+	QString path() const;
+	void setPath(const QString& path);
+
+	QAbstractItemModel* model() const;
+	void setModel(QAbstractItemModel* model);
+
+private:
+	QString m_path;
+	QAbstractItemModel* m_model;
+};
 
 // Синглтон Майерса.
 class DocumentsStorage : public QObject
