@@ -27,6 +27,7 @@ WordsOccurenceTableModel* WordsOccurenceTableWidget::getModel()
 
 void WordsOccurenceTableWidget::setItems(const CWTypes::WordsOccuring* wordsOccuring)
 {
+	// TODO: записывать в модель приложения.
 	WordsOccurenceTableModel* model = qobject_cast<WordsOccurenceTableModel*>(ui->tableView->model());
 
 	if (model)
