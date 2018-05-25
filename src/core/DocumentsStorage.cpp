@@ -98,7 +98,7 @@ WordsOccurenceTableModel*DocumentsStorage::getWordsOccurenceTableModel()
 
 QString DocumentsStorage::getNewDocumentsPath(const CWTypes::DocumentType documentType)
 {
-	return getDocumentsPath(documentType) + QDir::separator() + FilesHelpers::generateFileName();
+	return getDocumentsPath(documentType) + QDir::separator() + FilesHelpers::generateFileName("");
 }
 
 bool DocumentsStorage::createDocumentDir(const QString& fileName)

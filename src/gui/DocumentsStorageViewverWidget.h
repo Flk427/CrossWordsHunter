@@ -14,7 +14,7 @@ class DocumentsStorageViewverWidget : public QWidget
 	Q_OBJECT
 
 public:
-	explicit DocumentsStorageViewverWidget(QWidget *parent = 0);
+	explicit DocumentsStorageViewverWidget(QWidget *parent = nullptr);
 	~DocumentsStorageViewverWidget();
 
 	void setDocumentType(const CWTypes::DocumentType& documentType);

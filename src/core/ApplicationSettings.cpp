@@ -1,4 +1,6 @@
 #include "ApplicationSettings.h"
+#include <QApplication>
+#include <QDir>
 #include "KeywordsListModel.h"
 
 ApplicationSettings::ApplicationSettings()
@@ -85,7 +87,7 @@ ApplicationSettings& ApplicationSettings::Instance()
 
 QString ApplicationSettings::getDocumentsBaseDir()
 {
-	return "Storage";
+	return QApplication::applicationDirPath() + QDir::separator() + "Storage";
 }
 
 QString ApplicationSettings::getEventsDir()

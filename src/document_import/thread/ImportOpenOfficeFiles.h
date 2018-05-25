@@ -8,9 +8,10 @@ class ImportOpenOfficeFiles : public QObject
 {
 	Q_OBJECT
 public:
-	explicit ImportOpenOfficeFiles(CWTypes::DocumentType documentType, QStringList files, QObject *parent = nullptr);
+	explicit ImportOpenOfficeFiles(CWTypes::OfficeType office, CWTypes::DocumentType documentType, QStringList files, QObject *parent = nullptr);
 
 private:
+	CWTypes::OfficeType m_office;
 	CWTypes::DocumentType m_documentType;
 	QStringList m_files;
 

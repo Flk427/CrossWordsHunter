@@ -41,8 +41,10 @@ private slots:
 	void on_actiontest_mime_triggered();
 	void on_actiontest_Excel_1_triggered();
 	void on_actiontest_Libre_Office_triggered();
-	void on_actionImportEvents_triggered();
-	void on_actionImportJournals_triggered();
+	void on_actionImportEventsOO_triggered();
+	void on_actionImportJournalsOO_triggered();
+	void on_actionImportEventsMSO_triggered();
+	void on_actionImportJournalsMSO_triggered();
 
 private:
 	Ui::MainWindow *ui;

@@ -10,13 +10,13 @@ ImportOpenOfficeDocuments::ImportOpenOfficeDocuments(QObject *parent) : QObject(
 
 }
 
-void ImportOpenOfficeDocuments::start(MainWindow* owner, CWTypes::DocumentType documentType)
+void ImportOpenOfficeDocuments::start(MainWindow* owner, CWTypes::OfficeType office, CWTypes::DocumentType documentType)
 {
 	QStringList files = FilesHelpers::selectFiles(owner);
 
 	if (!files.empty())
 	{
-		startImportFiles(owner, documentType, files);
+		startImportFiles(owner, office, documentType, files);
 	}
 	else
 	{
@@ -24,10 +24,10 @@ void ImportOpenOfficeDocuments::start(MainWindow* owner, CWTypes::DocumentType d
 	}
 }
 
-void ImportOpenOfficeDocuments::startImportFiles(MainWindow* owner, CWTypes::DocumentType documentType, const QStringList& files)
+void ImportOpenOfficeDocuments::startImportFiles(MainWindow* owner, CWTypes::OfficeType office, CWTypes::DocumentType documentType, const QStringList& files)
 {
 	QThread* searchThread = new QThread(owner);
-	ImportOpenOfficeFiles* importOpenOfficeFiles = new ImportOpenOfficeFiles(documentType, files);
+	ImportOpenOfficeFiles* importOpenOfficeFiles = new ImportOpenOfficeFiles(office, documentType, files);
 
 	ProgressBarWidget* progressBarWidget = new ProgressBarWidget(owner);
 

@@ -48,7 +48,7 @@ void DocumentsStorageViewverWidget::selectFirstDocument()
 
 void DocumentsStorageViewverWidget::selectDocument(QModelIndex index)
 {
-	QString documentName = ui->listView->model()->data(index, Qt::DisplayRole).toString();
+	QString documentName = ui->listView->model()->data(index, Qt::UserRole).toString();
 	QString fileName = DocumentsStorage::Instance().getDocumentsPath(m_documentType) + QDir::separator() + documentName;
 	QFile f(fileName);
 

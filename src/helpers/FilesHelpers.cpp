@@ -79,9 +79,27 @@ bool checkFileName(const QString& fileName)
 	return true;
 }
 
-QString generateFileName()
+QString generateFileName(const QString& fileName)
 {
-	return QDate::currentDate().toString("yyyyMMdd") + QTime::currentTime().toString("hhmmsszzz") + ".html";
+	if (fileName.isEmpty())
+	{
+		return QString("%1 %2 %3%4")
+				.arg(QDate::currentDate().toString("yyyyMMdd"))
+				.arg(QTime::currentTime().toString("hhmmss"))
+				.arg(QTime::currentTime().toString("zzz"))
+				.arg(".html");
+	}
+	else
+	{
+	QFileInfo fileInfo(fileName);
+
+	return QString("%1 %2 %3 %4%5")
+			.arg(QDate::currentDate().toString("yyyyMMdd"))
+			.arg(QTime::currentTime().toString("hhmmss"))
+			.arg(QTime::currentTime().toString("zzz"))
+			.arg(fileInfo.fileName())
+			.arg(".html");
+	}
 }
 
 bool readDocument(const QString& fileName, QTextDocument& document)
@@ -218,7 +236,7 @@ QStringList selectFiles(QWidget* parent)
 	return QStringList();
 }
 
-bool importOpenOfficeFile(CWTypes::DocumentType documentType, const QString& fileName)
+static bool importFile(const QString& importScript, CWTypes::DocumentType documentType, const QString& fileName)
 {
 	int result;
 
@@ -240,17 +258,17 @@ bool importOpenOfficeFile(CWTypes::DocumentType documentType, const QString& fil
 
 	if (fileFormat != CWTypes::DocumentFormat::Unknown)
 	{
-		QString args;
-		args += "oofileimport.vbs ";
-		args += fileFormatName + " ";
-		args += "\"" + fileName + "\" ";
-		args += "\"" + exportDir.absolutePath()
+		QString command;
+		command += QApplication::applicationDirPath() + QDir::separator() + importScript + " ";
+		command += fileFormatName + " ";
+		command += "\"" + fileName + "\" ";
+		command += "\"" + exportDir.absolutePath()
 				+ QDir::separator()
-				+ generateFileName() + "\"";
+				+ generateFileName(fileName) + "\"";
 
 		QProcess process;
 
-		result = process.execute("wscript.exe " + args);
+		result = process.execute("wscript.exe " + command);
 		process.waitForFinished(30000);
 		return result == 0 ? true : false;
 	}
@@ -258,6 +276,16 @@ bool importOpenOfficeFile(CWTypes::DocumentType documentType, const QString& fil
 	{
 		return false;
 	}
+}
+
+bool importMicrosoftOfficeFile(CWTypes::DocumentType documentType, const QString& fileName)
+{
+	return importFile("msofileimport.vbs", documentType, fileName);
+}
+
+bool importOpenOfficeFile(CWTypes::DocumentType documentType, const QString& fileName)
+{
+	return importFile("oofileimport.vbs", documentType, fileName);
 }
 
 CWTypes::DocumentFormat getFileFormat(const QString& fileName)

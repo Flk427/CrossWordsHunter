@@ -11,6 +11,8 @@ namespace CWTypes
 enum DocumentType {Event, Journal};
 enum DocumentFormat {Unknown, TextDocument, SpeadSheet};
 
+enum OfficeType {OpenOffice, MicrosoftOffice};
+
 typedef struct
 {
 	int firstOccuring;

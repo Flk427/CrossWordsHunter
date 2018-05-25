@@ -344,9 +344,11 @@
      <string>Загрузить</string>
     </property>
     <addaction name="actionLoadEvent"/>
-    <addaction name="actionImportEvents"/>
     <addaction name="actionLoadJournal"/>
-    <addaction name="actionImportJournals"/>
+    <addaction name="actionImportEventsMSO"/>
+    <addaction name="actionImportJournalsMSO"/>
+    <addaction name="actionImportEventsOO"/>
+    <addaction name="actionImportJournalsOO"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -440,14 +442,24 @@
     <string>test Libre Office</string>
    </property>
   </action>
-  <action name="actionImportEvents">
+  <action name="actionImportEventsOO">
    <property name="text">
-    <string>Сводки...</string>
+    <string>Сводки... (OpenOffice)</string>
    </property>
   </action>
-  <action name="actionImportJournals">
+  <action name="actionImportJournalsOO">
    <property name="text">
-    <string>Реестры...</string>
+    <string>Реестры... (OpenOffice)</string>
+   </property>
+  </action>
+  <action name="actionImportEventsMSO">
+   <property name="text">
+    <string>Сводки... (Microsoft Office)</string>
+   </property>
+  </action>
+  <action name="actionImportJournalsMSO">
+   <property name="text">
+    <string>Реестры... (Microsoft Office)</string>
    </property>
   </action>
  </widget>

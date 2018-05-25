@@ -200,22 +200,42 @@ void MainWindow::on_actiontest_Libre_Office_triggered()
 	t::testLibreOffice(this);
 }
 
-void MainWindow::on_actionImportEvents_triggered()
+void MainWindow::on_actionImportEventsOO_triggered()
 {
 	ui->tabWidget->setCurrentIndex(1);
 	ui->wordsOccurenceTableWidget->hide();
 	resetDocuments();
 
 	ImportOpenOfficeDocuments* importOpenOfficeDocuments = new ImportOpenOfficeDocuments();
-	importOpenOfficeDocuments->start(this, CWTypes::DocumentType::Event);
+	importOpenOfficeDocuments->start(this, CWTypes::OfficeType::OpenOffice, CWTypes::DocumentType::Event);
 }
 
-void MainWindow::on_actionImportJournals_triggered()
+void MainWindow::on_actionImportJournalsOO_triggered()
 {
 	ui->tabWidget->setCurrentIndex(1);
 	ui->wordsOccurenceTableWidget->hide();
 	resetDocuments();
 
 	ImportOpenOfficeDocuments* importOpenOfficeDocuments = new ImportOpenOfficeDocuments();
-	importOpenOfficeDocuments->start(this, CWTypes::DocumentType::Journal);
+	importOpenOfficeDocuments->start(this, CWTypes::OfficeType::OpenOffice, CWTypes::DocumentType::Journal);
+}
+
+void MainWindow::on_actionImportEventsMSO_triggered()
+{
+	ui->tabWidget->setCurrentIndex(1);
+	ui->wordsOccurenceTableWidget->hide();
+	resetDocuments();
+
+	ImportOpenOfficeDocuments* importOpenOfficeDocuments = new ImportOpenOfficeDocuments();
+	importOpenOfficeDocuments->start(this, CWTypes::OfficeType::MicrosoftOffice, CWTypes::DocumentType::Event);
+}
+
+void MainWindow::on_actionImportJournalsMSO_triggered()
+{
+	ui->tabWidget->setCurrentIndex(1);
+	ui->wordsOccurenceTableWidget->hide();
+	resetDocuments();
+
+	ImportOpenOfficeDocuments* importOpenOfficeDocuments = new ImportOpenOfficeDocuments();
+	importOpenOfficeDocuments->start(this, CWTypes::OfficeType::MicrosoftOffice, CWTypes::DocumentType::Journal);
 }

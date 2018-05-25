@@ -1,8 +1,9 @@
 #include "ImportOpenOfficeFiles.h"
 #include "helpers/FilesHelpers.h"
 
-ImportOpenOfficeFiles::ImportOpenOfficeFiles(CWTypes::DocumentType documentType, QStringList files, QObject *parent)
+ImportOpenOfficeFiles::ImportOpenOfficeFiles(CWTypes::OfficeType office, CWTypes::DocumentType documentType, QStringList files, QObject *parent)
 	: QObject(parent),
+	  m_office(office),
 	  m_documentType(documentType),
 	  m_files(files),
 	  m_stop(false)
@@ -17,10 +18,29 @@ void ImportOpenOfficeFiles::process()
 	{
 		if (m_stop) break;
 
-		if (FilesHelpers::importOpenOfficeFile(m_documentType, fileName))
+		if (m_office == CWTypes::OfficeType::OpenOffice)
 		{
-			++count;
-			emit progress();
+			if (FilesHelpers::importOpenOfficeFile(m_documentType, fileName))
+			{
+				++count;
+				emit progress();
+			}
+			else
+			{
+				break;
+			}
+		}
+		else if (m_office == CWTypes::OfficeType::MicrosoftOffice)
+		{
+			if (FilesHelpers::importMicrosoftOfficeFile(m_documentType, fileName))
+			{
+				++count;
+				emit progress();
+			}
+			else
+			{
+				break;
+			}
 		}
 	}
 

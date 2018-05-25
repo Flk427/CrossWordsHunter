@@ -1,6 +1,7 @@
 #include "DocumentsListModel.h"
 
 #include <QBrush>
+#include <QFileInfo>
 
 DocumentsListModel::DocumentsListModel()
 {
@@ -22,6 +23,19 @@ QVariant DocumentsListModel::data(const QModelIndex& index, int role) const
 {
 	if (role == Qt::DisplayRole)
 	{
+		// Вернёт имя файла, без расширения ".html".
+		if (index.row() >= m_stringList.count())
+		{
+			return QVariant();
+		}
+
+		QString fileName = m_stringList.at(index.row());
+
+		return QFileInfo(fileName).completeBaseName();
+	}
+	else if (role == Qt::UserRole)
+	{
+		// Вернёт полное имя файла.
 		if (index.row() >= m_stringList.count())
 		{
 			return QVariant();

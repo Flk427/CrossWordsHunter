@@ -10,10 +10,10 @@ class ImportOpenOfficeDocuments : public QObject
 public:
 	explicit ImportOpenOfficeDocuments(QObject *parent = nullptr);
 
-	void start(MainWindow* owner, CWTypes::DocumentType documentType);
+	void start(MainWindow* owner, CWTypes::OfficeType office, CWTypes::DocumentType documentType);
 
 private:
-	void startImportFiles(MainWindow* owner, CWTypes::DocumentType documentType, const QStringList& files);
+	void startImportFiles(MainWindow* owner, CWTypes::OfficeType office, CWTypes::DocumentType documentType, const QStringList& files);
 
 signals:
 

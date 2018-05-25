@@ -20,17 +20,18 @@ void DocumentTextHighlighter::setKeywords(const QStringList& keywords, Highlight
 	}
 
 	classFormat.setFontWeight(QFont::Bold);
+	classFormat.setBackground(QBrush(QColor(Qt::black)));
 
 	foreach(const QString& keyword, keywords)
 	{
 		if (highlightType == htKeyword)
 		{
-			classFormat.setForeground(Qt::magenta);
+			classFormat.setForeground(Qt::white);
 			rule.pattern = QRegularExpression("([А-Яа-я]|\\w)*" + keyword + "([А-Яа-я]|\\w)*");
 		}
 		else
 		{
-			classFormat.setForeground(Qt::red);
+			classFormat.setForeground(QColor(0xFF, 0x80, 0x80));
 			rule.pattern = QRegularExpression(keyword);
 		}
 
