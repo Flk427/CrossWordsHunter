@@ -7,7 +7,7 @@
 #include "search/SearchConjunction.h"
 #include "search/SearchKeywords.h"
 #include "search/SearchWord.h"
-#include "document_import/ImportOpenOfficeDocuments.h"
+#include "document_import/ImportDocuments.h"
 #include "tests.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -206,7 +206,7 @@ void MainWindow::on_actionImportEventsOO_triggered()
 	ui->wordsOccurenceTableWidget->hide();
 	resetDocuments();
 
-	ImportOpenOfficeDocuments* importOpenOfficeDocuments = new ImportOpenOfficeDocuments();
+	ImportDocuments* importOpenOfficeDocuments = new ImportDocuments();
 	importOpenOfficeDocuments->start(this, CWTypes::OfficeType::OpenOffice, CWTypes::DocumentType::Event);
 }
 
@@ -216,7 +216,7 @@ void MainWindow::on_actionImportJournalsOO_triggered()
 	ui->wordsOccurenceTableWidget->hide();
 	resetDocuments();
 
-	ImportOpenOfficeDocuments* importOpenOfficeDocuments = new ImportOpenOfficeDocuments();
+	ImportDocuments* importOpenOfficeDocuments = new ImportDocuments();
 	importOpenOfficeDocuments->start(this, CWTypes::OfficeType::OpenOffice, CWTypes::DocumentType::Journal);
 }
 
@@ -226,7 +226,7 @@ void MainWindow::on_actionImportEventsMSO_triggered()
 	ui->wordsOccurenceTableWidget->hide();
 	resetDocuments();
 
-	ImportOpenOfficeDocuments* importOpenOfficeDocuments = new ImportOpenOfficeDocuments();
+	ImportDocuments* importOpenOfficeDocuments = new ImportDocuments();
 	importOpenOfficeDocuments->start(this, CWTypes::OfficeType::MicrosoftOffice, CWTypes::DocumentType::Event);
 }
 
@@ -236,6 +236,6 @@ void MainWindow::on_actionImportJournalsMSO_triggered()
 	ui->wordsOccurenceTableWidget->hide();
 	resetDocuments();
 
-	ImportOpenOfficeDocuments* importOpenOfficeDocuments = new ImportOpenOfficeDocuments();
+	ImportDocuments* importOpenOfficeDocuments = new ImportDocuments();
 	importOpenOfficeDocuments->start(this, CWTypes::OfficeType::MicrosoftOffice, CWTypes::DocumentType::Journal);
 }

@@ -59,8 +59,8 @@ SOURCES += main.cpp \
     search/SearchKeywords.cpp \
     search/SearchWord.cpp \
     tests.cpp \
-    document_import/ImportOpenOfficeDocuments.cpp \
-    document_import/thread/ImportOpenOfficeFiles.cpp
+    document_import/ImportDocuments.cpp \
+    document_import/thread/ImportOfficeFiles.cpp
 
 HEADERS += \
     helpers/WordsHelpers.h \
@@ -89,8 +89,8 @@ HEADERS += \
     search/SearchKeywords.h \
     search/SearchWord.h \
     tests.h \
-    document_import/ImportOpenOfficeDocuments.h \
-    document_import/thread/ImportOpenOfficeFiles.h
+    document_import/ImportDocuments.h \
+    document_import/thread/ImportOfficeFiles.h
 
 FORMS += \
     gui/MainWindow.ui \

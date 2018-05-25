@@ -1,14 +1,14 @@
-#ifndef IMPORTOPENOFFICEFILES_H
-#define IMPORTOPENOFFICEFILES_H
+#ifndef IMPORTOFFICEFILES_H
+#define IMPORTOFFICEFILES_H
 
 #include <QObject>
 #include "core/types.h"
 
-class ImportOpenOfficeFiles : public QObject
+class ImportOfficeFiles : public QObject
 {
 	Q_OBJECT
 public:
-	explicit ImportOpenOfficeFiles(CWTypes::OfficeType office, CWTypes::DocumentType documentType, QStringList files, QObject *parent = nullptr);
+	explicit ImportOfficeFiles(CWTypes::OfficeType office, CWTypes::DocumentType documentType, QStringList files, QObject *parent = nullptr);
 
 private:
 	CWTypes::OfficeType m_office;
@@ -26,4 +26,4 @@ public slots:
 	void stop();
 };
 
-#endif // IMPORTOPENOFFICEDOCUMENTS_H
+#endif // IMPORTOFFICEFILES_H

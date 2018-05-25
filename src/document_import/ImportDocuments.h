@@ -1,14 +1,14 @@
-#ifndef IMPORTOPENOFFICEDOCUMENTS_H
-#define IMPORTOPENOFFICEDOCUMENTS_H
+#ifndef IMPORTDOCUMENTS_H
+#define IMPORTDOCUMENTS_H
 
 #include <QObject>
 #include "gui/MainWindow.h"
 
-class ImportOpenOfficeDocuments : public QObject
+class ImportDocuments : public QObject
 {
 	Q_OBJECT
 public:
-	explicit ImportOpenOfficeDocuments(QObject *parent = nullptr);
+	explicit ImportDocuments(QObject *parent = nullptr);
 
 	void start(MainWindow* owner, CWTypes::OfficeType office, CWTypes::DocumentType documentType);
 
@@ -20,4 +20,4 @@ signals:
 public slots:
 };
 
-#endif // IMPORTOPENOFFICEDOCUMENTS_H
+#endif // IMPORTDOCUMENTS_H
