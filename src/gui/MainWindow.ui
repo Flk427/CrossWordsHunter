@@ -375,6 +375,7 @@
     <addaction name="actiontest_Excel_1"/>
     <addaction name="actiontest_mime"/>
     <addaction name="actiontest_Libre_Office"/>
+    <addaction name="actiontest_threads"/>
    </widget>
    <addaction name="menu_3"/>
    <addaction name="menu"/>
@@ -460,6 +461,11 @@
   <action name="actionImportJournalsMSO">
    <property name="text">
     <string>Реестры... (Microsoft Office)</string>
+   </property>
+  </action>
+  <action name="actiontest_threads">
+   <property name="text">
+    <string>test threads</string>
    </property>
   </action>
  </widget>

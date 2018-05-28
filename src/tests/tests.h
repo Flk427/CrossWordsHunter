@@ -16,6 +16,7 @@ void testQAX(QObject* parent = nullptr);
 void testExcel1();
 void testMime(QWidget* parent = nullptr);
 void testLibreOffice(QObject* parent = nullptr);
+void threadTest();
 
 }
 

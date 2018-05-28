@@ -239,3 +239,8 @@ void MainWindow::on_actionImportJournalsMSO_triggered()
 	ImportDocuments* importOpenOfficeDocuments = new ImportDocuments();
 	importOpenOfficeDocuments->start(this, CWTypes::OfficeType::MicrosoftOffice, CWTypes::DocumentType::Journal);
 }
+
+void MainWindow::on_actiontest_threads_triggered()
+{
+	t::threadTest();
+}

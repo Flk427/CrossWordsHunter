@@ -45,6 +45,7 @@ private slots:
 	void on_actionImportJournalsOO_triggered();
 	void on_actionImportEventsMSO_triggered();
 	void on_actionImportJournalsMSO_triggered();
+	void on_actiontest_threads_triggered();
 
 private:
 	Ui::MainWindow *ui;

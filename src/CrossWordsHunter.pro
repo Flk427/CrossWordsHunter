@@ -60,7 +60,9 @@ SOURCES += main.cpp \
     search/SearchWord.cpp \
     tests/tests.cpp \
     document_import/ImportDocuments.cpp \
-    document_import/thread/ImportOfficeFiles.cpp
+    document_import/thread/ImportOfficeFiles.cpp \
+    core/thread/ThreadObject.cpp \
+    core/thread/BaseTreadBody.cpp
 
 HEADERS += \
     helpers/WordsHelpers.h \
@@ -90,7 +92,9 @@ HEADERS += \
     search/SearchWord.h \
     tests/tests.h \
     document_import/ImportDocuments.h \
-    document_import/thread/ImportOfficeFiles.h
+    document_import/thread/ImportOfficeFiles.h \
+    core/thread/ThreadObject.h \
+    core/thread/BaseTreadBody.h
 
 FORMS += \
     gui/MainWindow.ui \
