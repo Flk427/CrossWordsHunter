@@ -62,7 +62,8 @@ SOURCES += main.cpp \
     document_import/ImportDocuments.cpp \
     document_import/thread/ImportOfficeFiles.cpp \
     core/thread/ThreadObject.cpp \
-    core/thread/BaseTreadBody.cpp
+    core/thread/BaseTreadBody.cpp \
+    helpers/GuiHelpers.cpp
 
 HEADERS += \
     helpers/WordsHelpers.h \
@@ -94,7 +95,8 @@ HEADERS += \
     document_import/ImportDocuments.h \
     document_import/thread/ImportOfficeFiles.h \
     core/thread/ThreadObject.h \
-    core/thread/BaseTreadBody.h
+    core/thread/BaseTreadBody.h \
+    helpers/GuiHelpers.h
 
 FORMS += \
     gui/MainWindow.ui \

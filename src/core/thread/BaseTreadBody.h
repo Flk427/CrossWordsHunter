@@ -11,6 +11,7 @@ public:
 
 signals:
 	void progress();
+	void reportState(int value, int maximum);
 	void finished();
 
 public slots:
