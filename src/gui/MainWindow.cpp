@@ -8,7 +8,7 @@
 #include "search/SearchKeywords.h"
 #include "search/SearchWord.h"
 #include "document_import/ImportDocuments.h"
-#include "tests.h"
+#include "tests/tests.h"
 
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),

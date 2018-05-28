@@ -58,7 +58,7 @@ SOURCES += main.cpp \
     search/SearchConjunction.cpp \
     search/SearchKeywords.cpp \
     search/SearchWord.cpp \
-    tests.cpp \
+    tests/tests.cpp \
     document_import/ImportDocuments.cpp \
     document_import/thread/ImportOfficeFiles.cpp
 
@@ -88,7 +88,7 @@ HEADERS += \
     search/SearchConjunction.h \
     search/SearchKeywords.h \
     search/SearchWord.h \
-    tests.h \
+    tests/tests.h \
     document_import/ImportDocuments.h \
     document_import/thread/ImportOfficeFiles.h
 
