@@ -18,6 +18,8 @@ Const xlHtml = 44
 Const xlWebArchive = 45
 
 Dim result : result = 0
+Dim objWord
+Dim objExcel
 
 '''''''''''''''''''''''''''''''''''
 Function importExcelFile(src, dest)
@@ -90,7 +92,7 @@ Sub Doc2HTML( myFile , destFile)
 ' Written by Rob van der Woude
 ' http://www.robvanderwoude.com
     ' Standard housekeeping
-    Dim objDoc, objFile, objFSO, objWord, strFile, strHTML
+    Dim objDoc, objFile, objFSO, strFile, strHTML
 
     Const wdFormatDocument                    =  0
     Const wdFormatDocument97                  =  0
@@ -129,7 +131,7 @@ Sub Doc2HTML( myFile , destFile)
 
     With objWord
         ' True: make Word visible; False: invisible
-        .Visible = True
+        .Visible = False
 
         ' Check if the Word document exists
         If objFSO.FileExists( myFile ) Then
@@ -161,7 +163,17 @@ Sub Doc2HTML( myFile , destFile)
         ' Close Word
         .Quit
     End With
+
+	result = 1
 End Sub 
+
+Sub quitWord
+	objWord.Quit
+End Sub
+
+Sub quitExcel
+	objExcel.Quit
+End Sub
 
 
 ' text / table
@@ -169,13 +181,19 @@ Dim docType : docType = WScript.Arguments.Item(0)
 Dim path : path = WScript.Arguments.Item(1)
 Dim destFile : destFile = WScript.Arguments.Item(2)
 
-if docType = "table" Then
-	importExcelFile path, destFile
-Else
+'WScript.Echo docType
+'WScript.Echo path
+'WScript.Echo destFile
+
+if docType = "text" Then
 	If docType = "text" Then
-'		importWordFile path, destFile
-		Doc2HTML path, destFile
+		importWordFile path, destFile
+'		Doc2HTML path, destFile
+		quitWord
 	End If
+Else
+	importExcelFile path, destFile
+	quitExcel
 End If
 
 if Err.Number<>0 then

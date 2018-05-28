@@ -50,3 +50,8 @@ Doc.storeToUrl Url2, FileProperties
 
 'Удаляем инстанцию
 Doc.Dispose
+
+if Err.Number<>0 then
+'   WScript.Echo Err.Description
+	WScript.Quit 2
+end if
