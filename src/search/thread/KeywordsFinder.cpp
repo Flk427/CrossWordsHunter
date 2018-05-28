@@ -4,7 +4,7 @@
 #include "core/DocumentsStorage.h"
 #include "core/KeywordsListModel.h"
 
-KeywordsFinder::KeywordsFinder(QObject *parent) : QObject(parent)
+KeywordsFinder::KeywordsFinder() : BaseTreadBody()
 {
 
 }
@@ -28,11 +28,6 @@ void KeywordsFinder::process()
 	findKeywords(eventsPath, eventFiles, CWTypes::Event);
 	findKeywords(journalsPath, journalFiles, CWTypes::Journal);
 	emit finished();
-}
-
-void KeywordsFinder::stop()
-{
-	m_stop = true;
 }
 
 void KeywordsFinder::findKeywords(const QString& path, const QStringList& files, CWTypes::DocumentType type)

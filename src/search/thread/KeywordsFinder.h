@@ -4,25 +4,20 @@
 #include <QObject>
 #include <QDir>
 #include "core/types.h"
+#include "core/thread/BaseTreadBody.h"
 
-class KeywordsFinder : public QObject
+class KeywordsFinder : public BaseTreadBody
 {
 	Q_OBJECT
 public:
-	explicit KeywordsFinder(QObject *parent);
-
-signals:
-	void reportState(int value, int maximum);
-	void finished();
+	explicit KeywordsFinder();
 
 public slots:
 	void process();
-	void stop();
 
 private:
 	void findKeywords(const QString& path, const QStringList& files, CWTypes::DocumentType type);
 
-	bool m_stop;
 	int m_count;
 	int m_current;
 };
