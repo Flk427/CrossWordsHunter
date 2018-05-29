@@ -17,6 +17,9 @@ Const wdFormatFilteredHTML = 10 'for Filtered HTML output
 Const xlHtml = 44
 Const xlWebArchive = 45
 
+Const xlSourceSheet = 1
+Const xlHtmlStatic = 0
+
 Dim result : result = 0
 Dim objWord
 Dim objExcel
@@ -31,10 +34,25 @@ Function importExcelFile(src, dest)
 	objExcel.Workbooks.Open src
 	' Save the workbook as an HTML or MHTML page...
 	'objExcel.ActiveWorkbook.SaveAs "C:\Folder\MyPage.html",  xlHtml
-	objExcel.ActiveWorkbook.SaveAs dest, xlHtml
+	'objExcel.ActiveWorkbook.Activesheet.Copy
+
+	'objExcel.ActiveWorkbook.SaveAs dest, xlHtml
+
+	' https://msdn.microsoft.com/en-us/library/office/aa221100(v=office.11).aspx
+        '"C:\projects\build\CrossWordsHunter-msvc2013_x86-Debug\debug\files\2\загадка.htm" _
+
+	' TODO: check index range
+	' TODO: save all sheets to separate file
+	With objExcel.ActiveWorkbook.PublishObjects.Add(xlSourceSheet, dest, objExcel.ActiveWorkbook.Sheets(1).Name, "", xlHtmlStatic, objExcel.ActiveWorkbook.Name & "_5698", "")
+	        .Publish (True)
+        	.AutoRepublish = False
+	End With
+
 	' -or-
 	'objExcel.ActiveWorkbook.SaveAs "C:\Folder\MyPage.mhtml", xlWebArchive
 	' Close Excel...
+	'objExcel.Close
+	objExcel.ActiveWorkbook.saved = True
 	objExcel.Quit
 
 	'create the excel object
