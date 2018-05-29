@@ -7,7 +7,7 @@
 #include "helpers/WordsHelpers.h"
 
 WordsOccurence::WordsOccurence(const QString& dir1, const QString& dir2)
-	: BaseTreadBody(),
+	: BaseThreadBody(),
 	  m_dir1(dir1),
 	  m_dir2(dir2)
 {

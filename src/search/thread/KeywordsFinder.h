@@ -4,9 +4,9 @@
 #include <QObject>
 #include <QDir>
 #include "core/types.h"
-#include "core/thread/BaseTreadBody.h"
+#include "core/thread/BaseThreadBody.h"
 
-class KeywordsFinder : public BaseTreadBody
+class KeywordsFinder : public BaseThreadBody
 {
 	Q_OBJECT
 public:

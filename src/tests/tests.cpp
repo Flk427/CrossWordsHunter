@@ -11,7 +11,7 @@
 #include <QUrl>
 #include <QTextEdit>
 
-#include "core/thread/BaseTreadBody.h"
+#include "core/thread/BaseThreadBody.h"
 #include "core/thread/ThreadObject.h"
 
 namespace t {
@@ -234,12 +234,12 @@ void testLibreOffice(QObject* parent)
 	delete serviceManager;
 }
 
-class TestTreadBody : public BaseTreadBody
+class TestTreadBody : public BaseThreadBody
 {
 public:
 	TestTreadBody()
 	{
-		::BaseTreadBody();
+		::BaseThreadBody();
 
 		qDebug() << "TestTreadBody()";
 	}
@@ -254,7 +254,7 @@ public slots:
 	{
 		qDebug() << "process()";
 
-		BaseTreadBody::process();
+		BaseThreadBody::process();
 	}
 };
 

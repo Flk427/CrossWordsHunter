@@ -2,7 +2,7 @@
 #define GUIHELPERS_H
 
 #include "gui/MainWindow.h"
-#include "core/thread/BaseTreadBody.h"
+#include "core/thread/BaseThreadBody.h"
 
 class GuiHelpers
 {
@@ -10,6 +10,6 @@ public:
 	GuiHelpers();
 };
 
-void createSearchProgressBarWidget(MainWindow* owner, BaseTreadBody* treadBody);
+void createSearchProgressBarWidget(MainWindow* owner, BaseThreadBody* treadBody);
 
 #endif // GUIHELPERS_H

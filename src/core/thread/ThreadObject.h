@@ -2,13 +2,13 @@
 #define THREADOBJECT_H
 
 #include <QObject>
-#include "BaseTreadBody.h"
+#include "BaseThreadBody.h"
 
 class ThreadObject : public QObject
 {
 	Q_OBJECT
 public:
-	explicit ThreadObject(BaseTreadBody* threadBody, QObject *parent = nullptr);
+	explicit ThreadObject(BaseThreadBody* threadBody, QObject *parent = nullptr);
 	virtual ~ThreadObject();
 
 	void start();
@@ -21,7 +21,7 @@ public slots:
 
 private:
 	QThread* m_thread;
-	BaseTreadBody* m_threadBody;
+	BaseThreadBody* m_threadBody;
 };
 
 #endif // THREADOBJECT_H

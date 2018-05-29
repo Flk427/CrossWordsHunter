@@ -2,7 +2,7 @@
 #include <QThread>
 #include <QDebug>
 
-ThreadObject::ThreadObject(BaseTreadBody* threadBody, QObject *parent)
+ThreadObject::ThreadObject(BaseThreadBody* threadBody, QObject *parent)
 	: QObject(parent),
 	  m_threadBody(threadBody)
 {
@@ -10,11 +10,11 @@ ThreadObject::ThreadObject(BaseTreadBody* threadBody, QObject *parent)
 	m_threadBody->moveToThread(m_thread);
 
 	// Соединяем сигнал started потока, со слотом process "рабочего" класса, т.е. начинается выполнение нужной работы.
-	connect(m_thread, &QThread::started, m_threadBody, &BaseTreadBody::process);
-	connect(m_threadBody, &BaseTreadBody::progress, this, &ThreadObject::progress);
+	connect(m_thread, &QThread::started, m_threadBody, &BaseThreadBody::process);
+	connect(m_threadBody, &BaseThreadBody::progress, this, &ThreadObject::progress);
 	// По завершению выходим из потока, и удаляем рабочий класс
-	connect(m_threadBody, &BaseTreadBody::finished, m_thread, &QThread::quit);
-	connect(m_threadBody, &BaseTreadBody::finished, m_threadBody, &BaseTreadBody::deleteLater);
+	connect(m_threadBody, &BaseThreadBody::finished, m_thread, &QThread::quit);
+	connect(m_threadBody, &BaseThreadBody::finished, m_threadBody, &BaseThreadBody::deleteLater);
 	// Удаляем поток, после выполнения операции
 	connect(m_thread, &QThread::finished, m_thread, &QThread::deleteLater);
 	// Удаляем сами себя.

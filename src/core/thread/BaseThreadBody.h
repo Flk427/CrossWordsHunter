@@ -3,11 +3,11 @@
 
 #include <QObject>
 
-class BaseTreadBody : public QObject
+class BaseThreadBody : public QObject
 {
 	Q_OBJECT
 public:
-	explicit BaseTreadBody();
+	explicit BaseThreadBody();
 
 signals:
 	void progress();

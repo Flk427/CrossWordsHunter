@@ -4,9 +4,9 @@
 #include <QObject>
 #include <QStringList>
 #include "core/types.h"
-#include "core/thread/BaseTreadBody.h"
+#include "core/thread/BaseThreadBody.h"
 
-class WordsOccurence : public BaseTreadBody
+class WordsOccurence : public BaseThreadBody
 {
 	Q_OBJECT
 public:

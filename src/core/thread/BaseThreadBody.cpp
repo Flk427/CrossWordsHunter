@@ -1,13 +1,13 @@
-#include "BaseTreadBody.h"
+#include "BaseThreadBody.h"
 #include <QDebug>
 
-BaseTreadBody::BaseTreadBody()
+BaseThreadBody::BaseThreadBody()
 	: QObject(nullptr),
 	  m_stop(false)
 {
 }
 
-void BaseTreadBody::process()
+void BaseThreadBody::process()
 {
 	qDebug() << "BaseTreadBody::process()";
 
@@ -15,7 +15,7 @@ void BaseTreadBody::process()
 	emit finished();
 }
 
-void BaseTreadBody::stop()
+void BaseThreadBody::stop()
 {
 	m_stop = true;
 }

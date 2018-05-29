@@ -5,7 +5,7 @@ GuiHelpers::GuiHelpers()
 {
 }
 
-void createSearchProgressBarWidget(MainWindow* owner, BaseTreadBody* treadBody)
+void createSearchProgressBarWidget(MainWindow* owner, BaseThreadBody* treadBody)
 {
 	ProgressBarWidget* progressBarWidget = new ProgressBarWidget(owner);
 
@@ -15,9 +15,9 @@ void createSearchProgressBarWidget(MainWindow* owner, BaseTreadBody* treadBody)
 	progressBarWidget->setWindowModality(Qt::WindowModality::WindowModal);
 	progressBarWidget->show();
 
-	QObject::connect(treadBody, &BaseTreadBody::progress, progressBarWidget, &ProgressBarWidget::incrementValue);
-	QObject::connect(treadBody, &BaseTreadBody::reportState, progressBarWidget, &ProgressBarWidget::setState);
-	QObject::connect(progressBarWidget, &ProgressBarWidget::closed, treadBody, &BaseTreadBody::stop, Qt::ConnectionType::DirectConnection);
+	QObject::connect(treadBody, &BaseThreadBody::progress, progressBarWidget, &ProgressBarWidget::incrementValue);
+	QObject::connect(treadBody, &BaseThreadBody::reportState, progressBarWidget, &ProgressBarWidget::setState);
+	QObject::connect(progressBarWidget, &ProgressBarWidget::closed, treadBody, &BaseThreadBody::stop, Qt::ConnectionType::DirectConnection);
 	// Удаляем прогрессбар.
-	QObject::connect(treadBody, &BaseTreadBody::finished, progressBarWidget, &ProgressBarWidget::deleteLater);
+	QObject::connect(treadBody, &BaseThreadBody::finished, progressBarWidget, &ProgressBarWidget::deleteLater);
 }

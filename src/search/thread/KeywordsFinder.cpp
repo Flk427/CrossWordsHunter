@@ -4,7 +4,7 @@
 #include "core/DocumentsStorage.h"
 #include "core/KeywordsListModel.h"
 
-KeywordsFinder::KeywordsFinder() : BaseTreadBody()
+KeywordsFinder::KeywordsFinder() : BaseThreadBody()
 {
 
 }
