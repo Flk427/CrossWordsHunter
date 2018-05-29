@@ -43,8 +43,8 @@ void WordsOccurenceTableModel::setItems(const CWTypes::WordsOccuring* wordsOccur
 
 		if (wordsOccuring->value(word).firstOccuring
 			&& wordsOccuring->value(word).secondOccuring
-			&& wordsOccuring->value(word).firstOccuring < 2
-			&& wordsOccuring->value(word).secondOccuring < 2)
+			&& wordsOccuring->value(word).firstOccuring < 3
+			&& wordsOccuring->value(word).secondOccuring < 3)
 		{
 			wordInfo.word = word;
 			wordInfo.occuring = wordsOccuring->value(word);

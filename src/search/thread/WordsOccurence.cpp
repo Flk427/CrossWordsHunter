@@ -78,6 +78,7 @@ void WordsOccurence::process()
 		}
 	}
 
+	/*
 	foreach (const QString& word, m_wordsOccuring.keys())
 	{
 		if (m_wordsOccuring[word].firstOccuring
@@ -88,6 +89,7 @@ void WordsOccurence::process()
 			qDebug() << word << m_wordsOccuring[word].firstOccuring << m_wordsOccuring[word].secondOccuring;
 		}
 	}
+	*/
 
 	emit wordsFound(&m_wordsOccuring);
 	emit finished();
