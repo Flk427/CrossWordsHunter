@@ -4,26 +4,23 @@
 #include <QObject>
 #include <QStringList>
 #include "core/types.h"
+#include "core/thread/BaseTreadBody.h"
 
-class WordsOccurence : public QObject
+class WordsOccurence : public BaseTreadBody
 {
 	Q_OBJECT
 public:
 	typedef QMap<QString, QPair<int, int>> CommonWordsStatistic;
 
-	explicit WordsOccurence(const QString& dir1, const QString& dir2, QObject *parent);
+	explicit WordsOccurence(const QString& dir1, const QString& dir2);
 
 signals:
-	void progress(int current, int total);
-	void finished();
 	void wordsFound(const CWTypes::WordsOccuring* wordsOccuring);
 
 public slots:
-	void process();
-	void stop();
+	virtual void process();
 
 private:
-	bool m_stop;
 	QString m_dir1;
 	QString m_dir2;
 	CWTypes::WordsOccuring m_wordsOccuring;

@@ -6,8 +6,8 @@
 #include "helpers/FilesHelpers.h"
 #include "helpers/WordsHelpers.h"
 
-WordsOccurence::WordsOccurence(const QString& dir1, const QString& dir2, QObject *parent)
-	: QObject(parent),
+WordsOccurence::WordsOccurence(const QString& dir1, const QString& dir2)
+	: BaseTreadBody(),
 	  m_dir1(dir1),
 	  m_dir2(dir2)
 {
@@ -51,7 +51,7 @@ void WordsOccurence::process()
 			}
 
 			current++;
-			emit progress(current, total);
+			emit reportState(current, total);
 		}
 
 		foreach (const QString& file2, files2)
@@ -74,7 +74,7 @@ void WordsOccurence::process()
 			}
 
 			current++;
-			emit progress(current, total);
+			emit reportState(current, total);
 		}
 	}
 
@@ -91,11 +91,6 @@ void WordsOccurence::process()
 
 	emit wordsFound(&m_wordsOccuring);
 	emit finished();
-}
-
-void WordsOccurence::stop()
-{
-	m_stop = true;
 }
 
 bool WordsOccurence::getFiles(QStringList& files1, QStringList& files2)
