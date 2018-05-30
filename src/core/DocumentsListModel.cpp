@@ -2,6 +2,7 @@
 
 #include <QBrush>
 #include <QFileInfo>
+#include <QUrl>
 
 DocumentsListModel::DocumentsListModel()
 {
@@ -30,8 +31,7 @@ QVariant DocumentsListModel::data(const QModelIndex& index, int role) const
 		}
 
 		QString fileName = m_stringList.at(index.row());
-
-		return QFileInfo(fileName).completeBaseName();
+		return QFileInfo(fileName).completeBaseName().replace("%20", " ");
 	}
 	else if (role == Qt::UserRole)
 	{
