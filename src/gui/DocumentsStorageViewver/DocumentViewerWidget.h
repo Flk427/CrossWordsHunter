@@ -7,12 +7,18 @@ namespace Ui {
 class DocumentViewerWidget;
 }
 
+/*!
+\brief The DocumentViewerWidget class
+
+Для перехода по найденным словам составляется список слов и их позиций,
+упорядоченный по возрастанию позиции.
+*/
 class DocumentViewerWidget : public QWidget
 {
 	Q_OBJECT
 
 public:
-	explicit DocumentViewerWidget(QWidget *parent = 0);
+	explicit DocumentViewerWidget(QWidget *parent = nullptr);
 	~DocumentViewerWidget();
 
 	void openDocument(const QString& fileName);
@@ -26,10 +32,23 @@ public slots:
 	void resetText();
 
 private:
-	Ui::DocumentViewerWidget *ui;
+	typedef struct
+	{
+		int anchor;
+		int position;
+	} WordAttributes;
 
-	void search(const QString& str, bool matchCase);
-	void searchWord(const QString& word, bool forward = true);
+	typedef QList<WordAttributes> WordsIndex;
+
+	Ui::DocumentViewerWidget *ui;
+	WordsIndex m_wordsIndex;
+	int m_currentSelectedWord;
+
+	void fillWordsIndex();
+	void findWords(const QStringList wordsList);
+	void updateSelection();
+	void search(const QString& str, bool matchCase); // не исп.
+	void searchWord(const QString& word, bool forward = true); // не исп.
 
 private slots:
 	void searchNextWord();
