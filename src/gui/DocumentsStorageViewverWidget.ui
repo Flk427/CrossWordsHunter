@@ -89,7 +89,7 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="DocumentEditorWidget" name="textEdit"/>
+           <widget class="DocumentEditorWidget" name="documentEditor"/>
           </item>
           <item>
            <widget class="QFrame" name="frame_3">

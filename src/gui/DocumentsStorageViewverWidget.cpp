@@ -14,7 +14,7 @@ DocumentsStorageViewverWidget::DocumentsStorageViewverWidget(QWidget *parent) :
 	ui->setupUi(this);
 
 	m_documentType = CWTypes::Event;
-	connect(ui->textEdit, &DocumentEditorWidget::searchSelectedWord, this, &DocumentsStorageViewverWidget::searchSelectedWord);
+	connect(ui->documentEditor, &DocumentEditorWidget::searchSelectedWord, this, &DocumentsStorageViewverWidget::searchSelectedWord);
 	connect(ui->listView, &QListView::doubleClicked, this, &DocumentsStorageViewverWidget::selectDocument);
 
 	connect(ui->toolButtonNextWord, &QToolButton::clicked, this, &DocumentsStorageViewverWidget::searchNextWord);
@@ -62,12 +62,12 @@ void DocumentsStorageViewverWidget::selectDocument(QModelIndex index)
 
 		if (Qt::mightBeRichText(str))
 		{
-			ui->textEdit->setHtml(str);
+			ui->documentEditor->setHtml(str);
 		}
 		else
 		{
 			str = QString::fromLocal8Bit(data);
-			ui->textEdit->setPlainText(str);
+			ui->documentEditor->setPlainText(str);
 		}
 
 		searchNextWord();
@@ -76,24 +76,24 @@ void DocumentsStorageViewverWidget::selectDocument(QModelIndex index)
 
 void DocumentsStorageViewverWidget::test()
 {
-	QTextCursor textCursor = ui->textEdit->textCursor();
+	QTextCursor textCursor = ui->documentEditor->textCursor();
 	QTextBlockFormat textBlockFormat;
 	textBlockFormat.setBackground(Qt::red);
 	textCursor.select(QTextCursor::LineUnderCursor);
 	textCursor.setBlockFormat(textBlockFormat);
-	ui->textEdit->setTextCursor(textCursor);
+	ui->documentEditor->setTextCursor(textCursor);
 }
 
 void DocumentsStorageViewverWidget::resetText()
 {
-	ui->textEdit->clear();
+	ui->documentEditor->clear();
 }
 
 void DocumentsStorageViewverWidget::searchNextWord()
 {
 	if (!ApplicationSettings::Instance().getSearchWords().empty())
 	{
-		ui->textEdit->setFocus();
+		ui->documentEditor->setFocus();
 		searchWord(ApplicationSettings::Instance().getSearchWords().first());
 		return;
 //		search(ApplicationSettings::Instance().getSearchWords().first(), false);
@@ -104,7 +104,7 @@ void DocumentsStorageViewverWidget::searchPrevWord()
 {
 	if (!ApplicationSettings::Instance().getSearchWords().empty())
 	{
-		ui->textEdit->setFocus();
+		ui->documentEditor->setFocus();
 		searchWord(ApplicationSettings::Instance().getSearchWords().first(), false);
 		return;
 //		search(ApplicationSettings::Instance().getSearchWords().first(), false);
@@ -117,20 +117,20 @@ void DocumentsStorageViewverWidget::search(const QString& str, bool matchCase)
 
 	//if(!ui->textEdit->isReadOnly())
 	{
-		ui->textEdit->moveCursor(QTextCursor::Start);
+		ui->documentEditor->moveCursor(QTextCursor::Start);
 		QColor color = QColor(Qt::gray).lighter(130);
 
-		while(ui->textEdit->find(str))
+		while(ui->documentEditor->find(str))
 		{
 			QTextEdit::ExtraSelection extra;
 			extra.format.setBackground(color);
 
-			extra.cursor = ui->textEdit->textCursor();
+			extra.cursor = ui->documentEditor->textCursor();
 			extraSelections.append(extra);
 		}
 	}
 
-	ui->textEdit->setExtraSelections(extraSelections);
+	ui->documentEditor->setExtraSelections(extraSelections);
 }
 
 void DocumentsStorageViewverWidget::searchWord(const QString& word, bool forward)
@@ -143,11 +143,11 @@ void DocumentsStorageViewverWidget::searchWord(const QString& word, bool forward
 		// if (casesens) flag |= QTextDocument::FindCaseSensitively;
 		// if (words) flag |= QTextDocument::FindWholeWords;
 
-		QTextCursor cursor = ui->textEdit->textCursor();
+		QTextCursor cursor = ui->documentEditor->textCursor();
 		// here , you save the cursor position
 		//QTextCursor cursorSaved = cursor;
 
-		if (!ui->textEdit->find(word, flag))
+		if (!ui->documentEditor->find(word, flag))
 		{
 			cursor.movePosition(forward ? QTextCursor::End : QTextCursor::Start);
 		}
