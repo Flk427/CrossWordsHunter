@@ -21,23 +21,18 @@ public:
 
 signals:
 	void searchSelectedWord(const QString& word);
+	void resetText();
 
 private:
 	Ui::DocumentsStorageViewverWidget *ui;
 
 	CWTypes::DocumentType m_documentType;
 
-	void search(const QString& str, bool matchCase);
-	void searchWord(const QString& word, bool forward = true);
-
 public slots:
 	void setModel(QAbstractListModel* model);
 	void selectFirstDocument();
 	void selectDocument(QModelIndex index);
 	void test();
-	void resetText();
-	void searchNextWord();
-	void searchPrevWord();
 };
 
 #endif // DOCUMENTSSTORAGEVIEWVERWIDGET_H

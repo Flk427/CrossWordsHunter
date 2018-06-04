@@ -63,7 +63,8 @@ SOURCES += main.cpp \
     document_import/thread/ImportOfficeFiles.cpp \
     core/thread/ThreadObject.cpp \
     helpers/GuiHelpers.cpp \
-    core/thread/BaseThreadBody.cpp
+    core/thread/BaseThreadBody.cpp \
+    gui/DocumentsStorageViewver/DocumentViewerWidget.cpp
 
 HEADERS += \
     helpers/WordsHelpers.h \
@@ -96,7 +97,8 @@ HEADERS += \
     document_import/thread/ImportOfficeFiles.h \
     core/thread/ThreadObject.h \
     helpers/GuiHelpers.h \
-    core/thread/BaseThreadBody.h
+    core/thread/BaseThreadBody.h \
+    gui/DocumentsStorageViewver/DocumentViewerWidget.h
 
 FORMS += \
     gui/MainWindow.ui \
@@ -104,7 +106,8 @@ FORMS += \
     gui/DocumentsStorageViewver/DocumentsStorageViewverWidget.ui \
     gui/SearchWordDialog.ui \
     gui/ProgressBarWidget.ui \
-    gui/WordsOccurenceTableWidget.ui
+    gui/WordsOccurenceTableWidget.ui \
+    gui/DocumentsStorageViewver/DocumentViewerWidget.ui
 
 DISTFILES += \
     CrossWordsHunter.rc
