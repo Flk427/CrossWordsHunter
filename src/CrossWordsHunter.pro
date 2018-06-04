@@ -43,10 +43,10 @@ SOURCES += main.cpp \
     helpers/FilesHelpers.cpp \
     core/DocumentsStorage.cpp \
     core/ApplicationSettings.cpp \
-    gui/DocumentsStorageViewverWidget.cpp \
+    gui/DocumentsStorageViewver/DocumentsStorageViewverWidget.cpp \
     core/DocumentsListModel.cpp \
     core/DocumentTextHighlighter.cpp \
-    gui/DocumentEditorWidget.cpp \
+    gui/DocumentsStorageViewver/DocumentEditorWidget.cpp \
     gui/SearchWordDialog.cpp \
     search/thread/WordFinder.cpp \
     search/thread/WordsOccurence.cpp \
@@ -75,10 +75,10 @@ HEADERS += \
     helpers/FilesHelpers.h \
     core/DocumentsStorage.h \
     core/ApplicationSettings.h \
-    gui/DocumentsStorageViewverWidget.h \
+    gui/DocumentsStorageViewver/DocumentsStorageViewverWidget.h \
     core/DocumentsListModel.h \
     core/DocumentTextHighlighter.h \
-    gui/DocumentEditorWidget.h \
+    gui/DocumentsStorageViewver/DocumentEditorWidget.h \
     gui/SearchWordDialog.h \
     search/thread/WordFinder.h \
     core/types.h \
@@ -101,7 +101,7 @@ HEADERS += \
 FORMS += \
     gui/MainWindow.ui \
     gui/TextEditorDialog.ui \
-    gui/DocumentsStorageViewverWidget.ui \
+    gui/DocumentsStorageViewver/DocumentsStorageViewverWidget.ui \
     gui/SearchWordDialog.ui \
     gui/ProgressBarWidget.ui \
     gui/WordsOccurenceTableWidget.ui

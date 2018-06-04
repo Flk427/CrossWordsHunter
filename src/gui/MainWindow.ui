@@ -471,15 +471,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>DocumentsStorageViewverWidget</class>
-   <extends>QWidget</extends>
-   <header>DocumentsStorageViewverWidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>WordsOccurenceTableWidget</class>
    <extends>QWidget</extends>
    <header>WordsOccurenceTableWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>DocumentsStorageViewverWidget</class>
+   <extends>QWidget</extends>
+   <header>DocumentsStorageViewver/DocumentsStorageViewverWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
