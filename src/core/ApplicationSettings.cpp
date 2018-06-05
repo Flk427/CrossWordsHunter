@@ -78,6 +78,11 @@ void ApplicationSettings::setSearchWord(const QString& searchWord)
 	}
 }
 
+void ApplicationSettings::setSearchWords(const QStringList &searchWords)
+{
+	m_searchWords = searchWords;
+}
+
 ApplicationSettings& ApplicationSettings::Instance()
 {
 	// согласно стандарту, этот код ленивый и потокобезопасный

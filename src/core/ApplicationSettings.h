@@ -37,6 +37,7 @@ public slots:
 	void addKeyword(const QString& keyword);
 	void removeKeyword(const QString& keyword);
 	void setSearchWord(const QString& searchWord);
+	void setSearchWords(const QStringList& searchWords);
 };
 
 #endif // APPLICATIONSETTINGS_H

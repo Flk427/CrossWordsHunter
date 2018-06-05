@@ -111,7 +111,6 @@ void DocumentViewerWidget::fillWordsIndex()
 	m_currentSelectedWord = 0;
 
 	findWords(ApplicationSettings::Instance().getSearchWords());
-	findWords(ApplicationSettings::Instance().readKeywords());
 
 	if (m_wordsIndex.size() > 0)
 	{
