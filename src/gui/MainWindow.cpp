@@ -109,7 +109,7 @@ void MainWindow::searchWord(const QString& word)
 		{
 			ui->wordsOccurenceTableWidget->hide();
 			resetDocuments();
-			ui->tabWidget->setCurrentIndex(1);
+			ui->tabWidget->setCurrentIndex(0);
 
 			SearchWord* searchWord = new SearchWord();
 			searchWord->start(this, m_searchWordDialog->getWord());
@@ -155,7 +155,7 @@ void MainWindow::on_actionQuit_triggered()
 
 void MainWindow::searchConjunction()
 {
-	ui->tabWidget->setCurrentIndex(1);
+	ui->tabWidget->setCurrentIndex(0);
 	resetDocuments();
 
 	DocumentsStorage::Instance().setDocumentsList(CWTypes::DocumentType::Event, QStringList());
@@ -167,7 +167,7 @@ void MainWindow::searchConjunction()
 
 void MainWindow::searchKeywords()
 {
-	ui->tabWidget->setCurrentIndex(1);
+	ui->tabWidget->setCurrentIndex(0);
 	ui->wordsOccurenceTableWidget->hide();
 	resetDocuments();
 
@@ -202,7 +202,7 @@ void MainWindow::on_actiontest_Libre_Office_triggered()
 
 void MainWindow::on_actionImportEventsOO_triggered()
 {
-	ui->tabWidget->setCurrentIndex(1);
+	ui->tabWidget->setCurrentIndex(0);
 	ui->wordsOccurenceTableWidget->hide();
 	resetDocuments();
 
@@ -212,7 +212,7 @@ void MainWindow::on_actionImportEventsOO_triggered()
 
 void MainWindow::on_actionImportJournalsOO_triggered()
 {
-	ui->tabWidget->setCurrentIndex(1);
+	ui->tabWidget->setCurrentIndex(0);
 	ui->wordsOccurenceTableWidget->hide();
 	resetDocuments();
 
@@ -222,7 +222,7 @@ void MainWindow::on_actionImportJournalsOO_triggered()
 
 void MainWindow::on_actionImportEventsMSO_triggered()
 {
-	ui->tabWidget->setCurrentIndex(1);
+	ui->tabWidget->setCurrentIndex(0);
 	ui->wordsOccurenceTableWidget->hide();
 	resetDocuments();
 
@@ -232,7 +232,7 @@ void MainWindow::on_actionImportEventsMSO_triggered()
 
 void MainWindow::on_actionImportJournalsMSO_triggered()
 {
-	ui->tabWidget->setCurrentIndex(1);
+	ui->tabWidget->setCurrentIndex(0);
 	ui->wordsOccurenceTableWidget->hide();
 	resetDocuments();
 
