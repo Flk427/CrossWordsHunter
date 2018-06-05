@@ -32,11 +32,29 @@ public slots:
 	void resetText();
 
 private:
-	typedef struct
+	struct WordAttributes
 	{
 		int anchor;
 		int position;
-	} WordAttributes;
+
+		WordAttributes(int _anchor, int _position)
+		{
+			anchor = _anchor;
+			position = _position;
+		}
+
+		bool operator==(const WordAttributes& wa)
+		{
+			if (this->anchor == wa.anchor && this->position == wa.position)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	};
 
 	typedef QList<WordAttributes> WordsIndex;
 

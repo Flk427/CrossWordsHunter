@@ -129,10 +129,10 @@ void DocumentViewerWidget::findWords(const QStringList wordsList)
 {
 	foreach (const QString& word, wordsList)
 	{
-		// qDebug() << word;
 		QTextCursor cursor = ui->documentEditor->textCursor();
 
 		cursor.movePosition(QTextCursor::Start);
+		ui->documentEditor->setTextCursor(cursor);
 
 		bool finished;
 
@@ -144,10 +144,12 @@ void DocumentViewerWidget::findWords(const QStringList wordsList)
 			{
 				qDebug() << word << ui->documentEditor->textCursor().anchor() << ui->documentEditor->textCursor().position();
 
-				WordAttributes wordAttributes;
-				wordAttributes.anchor = ui->documentEditor->textCursor().anchor();
-				wordAttributes.position = ui->documentEditor->textCursor().position();
-				m_wordsIndex.push_back(wordAttributes);
+				WordAttributes wordAttributes(ui->documentEditor->textCursor().anchor(), ui->documentEditor->textCursor().position());
+
+				if (!m_wordsIndex.contains(wordAttributes))
+				{
+					m_wordsIndex.push_back(wordAttributes);
+				}
 			}
 		}
 		while (!finished);
